@@ -20,6 +20,7 @@ namespace CryptoCore.Controllers
 
         public IActionResult Index()
         {
+            Console.WriteLine("Hello");
             return View();
         }
 

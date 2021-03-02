@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mike\\Desktop\\Coding\\GrandCircus\\CryptoCore\\CryptoCore\\CryptoCore.csproj": {}
+    "C:\\Users\\Jason\\Desktop\\code\\CryptoCore\\CryptoCore\\CryptoCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mike\\Desktop\\Coding\\GrandCircus\\CryptoCore\\CryptoCore\\CryptoCore.csproj": {
+    "C:\\Users\\Jason\\Desktop\\code\\CryptoCore\\CryptoCore\\CryptoCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mike\\Desktop\\Coding\\GrandCircus\\CryptoCore\\CryptoCore\\CryptoCore.csproj",
+        "projectUniqueName": "C:\\Users\\Jason\\Desktop\\code\\CryptoCore\\CryptoCore\\CryptoCore.csproj",
         "projectName": "CryptoCore",
-        "projectPath": "C:\\Users\\Mike\\Desktop\\Coding\\GrandCircus\\CryptoCore\\CryptoCore\\CryptoCore.csproj",
-        "packagesPath": "C:\\Users\\Mike\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mike\\Desktop\\Coding\\GrandCircus\\CryptoCore\\CryptoCore\\obj\\",
+        "projectPath": "C:\\Users\\Jason\\Desktop\\code\\CryptoCore\\CryptoCore\\CryptoCore.csproj",
+        "packagesPath": "C:\\Users\\Jason\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jason\\Desktop\\code\\CryptoCore\\CryptoCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jason\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
@@ -77,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

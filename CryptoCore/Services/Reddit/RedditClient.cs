@@ -7,7 +7,7 @@ namespace CryptoCore.Services.Reddit
 {
     public class RedditClient
     {
-        private readonly HttpClient _redditClient;
+        private readonly HttpClient _client;
         public RedditClient(HttpClient redditClient)
         {
             _client = redditClient;

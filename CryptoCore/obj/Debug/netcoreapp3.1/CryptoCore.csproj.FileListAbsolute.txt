@@ -1,0 +1,8 @@
+C:\Users\Jason\Desktop\code\CryptoCore\CryptoCore\obj\Debug\netcoreapp3.1\CryptoCore.csprojAssemblyReference.cache
+C:\Users\Jason\Desktop\code\CryptoCore\CryptoCore\obj\Debug\netcoreapp3.1\CryptoCore.AssemblyInfoInputs.cache
+C:\Users\Jason\Desktop\code\CryptoCore\CryptoCore\obj\Debug\netcoreapp3.1\CryptoCore.AssemblyInfo.cs
+C:\Users\Jason\Desktop\code\CryptoCore\CryptoCore\obj\Debug\netcoreapp3.1\CryptoCore.csproj.CoreCompileInputs.cache
+C:\Users\Jason\Desktop\code\CryptoCore\CryptoCore\obj\Debug\netcoreapp3.1\CryptoCore.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Jason\Desktop\code\CryptoCore\CryptoCore\obj\Debug\netcoreapp3.1\CryptoCore.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Jason\Desktop\code\CryptoCore\CryptoCore\obj\Debug\netcoreapp3.1\CryptoCore.RazorAssemblyInfo.cache
+C:\Users\Jason\Desktop\code\CryptoCore\CryptoCore\obj\Debug\netcoreapp3.1\CryptoCore.RazorAssemblyInfo.cs

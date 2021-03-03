@@ -36,7 +36,7 @@ namespace CryptoCore
            
             services.AddHttpClient<RedditClient>(redditClient =>
             {
-                redditClient.BaseAddress = new Uri("https://dog.ceo");
+                redditClient.BaseAddress = new Uri("https://www.reddit.com");
                 redditClient.Timeout = TimeSpan.FromSeconds(30);
             });
             services.AddControllersWithViews();

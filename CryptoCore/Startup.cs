@@ -12,6 +12,7 @@ using CryptoCore.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CryptoCore.Services.Reddit;
 
 namespace CryptoCore
 {
@@ -32,6 +33,12 @@ namespace CryptoCore
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+           
+            services.AddHttpClient<RedditClient>(redditClient =>
+            {
+                redditClient.BaseAddress = new Uri("https://dog.ceo");
+                redditClient.Timeout = TimeSpan.FromSeconds(30);
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

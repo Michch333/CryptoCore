@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CryptoCore.Models;
 namespace CryptoCore.Controllers
-
+{ 
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

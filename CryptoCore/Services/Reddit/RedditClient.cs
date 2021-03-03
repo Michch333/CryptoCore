@@ -10,7 +10,7 @@ namespace CryptoCore.Services.Reddit
         private readonly HttpClient _redditClient;
         public RedditClient(HttpClient redditClient)
         {
-            _redditClient = redditClient;
+            _client = redditClient;
         }
         public async Task<RedditResponse> GetRedditSearchInfo(string search = "DOGE")
         {

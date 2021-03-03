@@ -12,7 +12,7 @@ namespace CryptoCore.Services.Reddit
         {
             _redditClient = redditClient;
         }
-        public async Task<RedditResponse> GetBreedImages(string search = "DOGE")
+        public async Task<RedditResponse> GetRedditSearchInfo(string search = "DOGE")
         {
             var result = await _redditClient.GetAsync($"/search.json?q={search}");
 

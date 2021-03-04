@@ -35,9 +35,19 @@ namespace CryptoCore.Controllers
             return View(model);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
-            return View();
+            var model = new TickerViewModel();
+            var response = await _binanceClient.GetTwentyFourHourTickerInfo();
+            foreach (var coin in response)
+            {
+                var tempObject = new TickerModel();
+                tempObject.Symbol = coin.symbol;
+                tempObject.PriceChangePercent = coin.priceChangePercent;
+                model.Coins.Add(tempObject);
+
+            }
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

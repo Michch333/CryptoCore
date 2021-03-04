@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CryptoCore.Services.Reddit;
+using CryptoCore.Services.Binance;
 
 namespace CryptoCore
 {
@@ -38,6 +39,12 @@ namespace CryptoCore
             {
                 redditClient.BaseAddress = new Uri("https://www.reddit.com");
                 redditClient.Timeout = TimeSpan.FromSeconds(30);
+            });
+            services.AddHttpClient<BinanceClient>(binanceClient =>
+            {
+                binanceClient.BaseAddress = new Uri("https://api.binance.com");
+                binanceClient.Timeout = TimeSpan.FromSeconds(30);
+            
             });
             services.AddControllersWithViews();
             services.AddRazorPages();

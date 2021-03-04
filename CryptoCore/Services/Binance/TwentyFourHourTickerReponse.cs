@@ -8,11 +8,6 @@ namespace CryptoCore.Services.Binance
     public class TwentyFourHourTickerReponse
     {
 
-        public Class1[] Property1 { get; set; }
-
-
-        public class Class1
-        {
             public string symbol { get; set; }
             public string priceChange { get; set; }
             public string priceChangePercent { get; set; }
@@ -34,7 +29,7 @@ namespace CryptoCore.Services.Binance
             public int firstId { get; set; }
             public int lastId { get; set; }
             public int count { get; set; }
-        }
-
     }
+
 }
+

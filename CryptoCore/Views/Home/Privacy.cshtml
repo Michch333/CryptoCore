@@ -4,8 +4,3 @@
 <h1>@ViewData["Title"]</h1>
 @model TickerViewModel
 <p>Use this page to detail your site's privacy policy.</p>
-@foreach(var coin in Model.Coins)
-{
-    <p>@coin.Symbol</p>
-    <p>@coin.PriceChangePercent</p>
-}

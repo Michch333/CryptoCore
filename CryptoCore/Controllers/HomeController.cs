@@ -1,25 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CryptoCore.Models;
+using CryptoCore.Services.Binance;
+
+using System.Threading.Tasks;
+
 namespace CryptoCore.Controllers
-{ 
+{
     public class HomeController : Controller
     {
+        private readonly BinanceClient _binanceClient;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BinanceClient binanceClient)
         {
+            _binanceClient = binanceClient;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = new CurrentPriceViewModel();
+            var response = await _binanceClient.GetCurrentPrice();
+            foreach (var coin in response)
+            {
+                var tempObject = new CoinModel();
+                tempObject.Symbol = coin.symbol;
+                tempObject.Price = coin.price;
+                model.Coins.Add(tempObject);
+
+            }
+            return View(model);
         }
 
         public IActionResult Privacy()

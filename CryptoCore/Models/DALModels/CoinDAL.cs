@@ -10,11 +10,16 @@ namespace CryptoCore.Models.DALModels
 {
     public class CoinDAL
     {
+        public CoinDAL()
+        {
+            EntryTime = DateTime.Now;
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CoinId { get; set; }
         public string Symbol { get; set; }
-        public string Price  { get; set; }
+        public float Price  { get; set; }
         public string Name { get; set; }
+        public DateTime EntryTime { get; set; }
     }
 }

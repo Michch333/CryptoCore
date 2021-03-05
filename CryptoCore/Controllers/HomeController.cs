@@ -6,6 +6,8 @@ using CryptoCore.Models;
 using CryptoCore.Services.Binance;
 
 using System.Threading.Tasks;
+using CryptoCore.Data;
+using CryptoCore.Models.DALModels;
 
 namespace CryptoCore.Controllers
 {
@@ -13,11 +15,13 @@ namespace CryptoCore.Controllers
     {
         private readonly BinanceClient _binanceClient;
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger, BinanceClient binanceClient)
+        public HomeController(ILogger<HomeController> logger, BinanceClient binanceClient, ApplicationDbContext dbContext)
         {
             _binanceClient = binanceClient;
             _logger = logger;
+            _db = dbContext;
         }
 
         public async Task<IActionResult> Index()
@@ -35,7 +39,7 @@ namespace CryptoCore.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Privacy()
+        public IActionResult Privacy()
         {
             return View();
         }

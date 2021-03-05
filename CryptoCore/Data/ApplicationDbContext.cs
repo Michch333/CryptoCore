@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CryptoCore.Models.DALModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +13,6 @@ namespace CryptoCore.Data
             : base(options)
         {
         }
+        public DbSet<CoinDAL> Coins { get; set; }
     }
 }

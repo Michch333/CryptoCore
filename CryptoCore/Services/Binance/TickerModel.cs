@@ -24,9 +24,9 @@ namespace CryptoCore.Services.Binance
         public float Volume { get; set; }
         public float QuoteVolume { get; set; }
         public float OpenTime { get; set; }
-        public float CloseTime { get; set; }
-        public float FirstId { get; set; }
-        public float LastId { get; set; }
-        public float Count { get; set; }
+        public long CloseTime { get; set; }
+        public long FirstId { get; set; }
+        public int LastId { get; set; }
+        public int Count { get; set; }
     }
 }

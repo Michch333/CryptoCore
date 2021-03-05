@@ -33,7 +33,7 @@ namespace CryptoCore.Services.Binance
                 throw new HttpRequestException("Bad doge :(");
             }
         }
-        public async Task<List<TickerReponse>> GetTwentyFourHourTickerInfo()
+        public async Task<List<TickerResponse>> GetTwentyFourHourTickerInfo()
         {
             var result = await _client.GetAsync($"/api/v3/ticker/24hr");
 
@@ -42,7 +42,7 @@ namespace CryptoCore.Services.Binance
                 var stringContent = await result.Content.ReadAsStringAsync();
 
 
-                var obj = JsonSerializer.Deserialize<List<TickerReponse>>(stringContent);
+                var obj = JsonSerializer.Deserialize<List<TickerResponse>>(stringContent);
 
                 return obj;
             }

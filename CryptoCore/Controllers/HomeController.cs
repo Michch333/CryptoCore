@@ -83,6 +83,20 @@ namespace CryptoCore.Controllers
             }
             return View(model);
         }
+        public async Task<IActionResult> AddCoinToDB(string coinSymbol, float coinPrice)
+        {
+            var emptyCoin = new CoinDAL();
+            emptyCoin.Symbol = coinSymbol.Replace("USDT", "");
+            emptyCoin.Price = coinPrice;
+            emptyCoin.HighAlertThreshold = coinPrice * 1.10f;
+            emptyCoin.LowAlertThreshold = coinPrice * 0.90f;
+
+            _db.Add(emptyCoin);
+            _db.SaveChanges();
+            var model = new CurrentPriceViewModel();
+            model.Coins = await ConvertPricesToFloatAndRemoveUsdt();
+            return View("Index", model);
+        }
 
         public IActionResult Privacy()
         {

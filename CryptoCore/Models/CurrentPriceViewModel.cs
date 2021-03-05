@@ -11,5 +11,6 @@ namespace CryptoCore.Models
             Coins = new List<CoinModel>();
         }
         public List<CoinModel> Coins { get; set; }
+        public CoinModel SelectedCoin{ get; set; }
     }
 }

@@ -20,6 +20,8 @@ namespace CryptoCore.Models.DALModels
         public string Symbol { get; set; }
         public float Price  { get; set; }
         public string Name { get; set; }
+        public float HighAlertThreshold { get; set; }
+        public float LowAlertThreshold { get; set; }
         public DateTime EntryTime { get; set; }
     }
 }

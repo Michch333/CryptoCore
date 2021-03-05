@@ -41,6 +41,24 @@ namespace CryptoCore.Controllers
             return coinList;
         }
 
+        public async Task<List<TickerModel>> ConvertTickerToFloatAndRemoveUsdt()
+        {
+
+            var coinList = new List<TickerModel>();
+            var response = await _binanceClient.GetTwentyFourHourTickerInfo();
+            var newResponse = removeUsdt(response);
+            foreach (var coin in newResponse)
+            {
+                var tempObject = new TickerModel();
+                tempObject.Symbol = coin.symbol;
+                tempObject.PriceChangePercent = float.Parse(coin.priceChangePercent);
+                tempObject.PriceChange = float.Parse(coin.priceChange);
+                tempObject.Count = coin.count;
+                coinList.Add(tempObject);
+            }
+            return coinList;
+        }
+
         public List<CurrentPriceResponse> removeUsdt(List<CurrentPriceResponse> response)
         {
             var pickles = new List<CurrentPriceResponse>();
@@ -54,6 +72,23 @@ namespace CryptoCore.Controllers
                     pickles.Add(tempObject);
                 }
                 
+            }
+            return pickles;
+        }
+        public List<TickerResponse> removeUsdt(List<TickerResponse> response)
+        {
+            var pickles = new List<TickerResponse>();
+            foreach (var coin in response)
+            {
+                if (coin.symbol.EndsWith("USDT"))
+                {
+                    var tempObject = new TickerResponse();
+                    tempObject.symbol = coin.symbol;
+                    tempObject.priceChangePercent = coin.priceChangePercent;
+                    tempObject.count = coin.count;
+                    pickles.Add(tempObject);
+                }
+
             }
             return pickles;
         }

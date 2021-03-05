@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CryptoCore.Services.Binance
 {
-    public class TickerReponse
+    public class TickerResponse
     {
 
             public string symbol { get; set; }

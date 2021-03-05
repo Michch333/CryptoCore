@@ -3,8 +3,18 @@
 }
 @model CurrentPriceViewModel
 
-@foreach(var coin in Model.Coins)
-{
-    <p>@coin.Symbol.Replace("USDT","")</p>
-    <p>@coin.Price</p>
-}
+
+<table class="table">
+    <tr style="border-bottom: 3px solid black">
+        <th>Symbol</th>
+        <th>Price</th>
+    </tr>
+    
+    @foreach(var coin in Model.Coins)
+    {
+        <tr>
+            <td style="font-weight:bold">@coin.Symbol.Replace("USDT","")</td>
+            <td>$@coin.Price</td>
+        </tr>
+    }
+</table>

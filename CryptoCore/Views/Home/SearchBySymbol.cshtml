@@ -10,12 +10,20 @@
      <input type="submit" value="Search" /></p>
 
 </form>   
-
+<table class="table">
+<tr>
+    <th>Coin Symbol</th>
+    <th>Price</th>
+    <th>Add</th>
+</tr>
 @foreach(var coin in Model.Coins)
 {
-    <form method="post" asp-controller="Home" asp-action="AddCoinToDB" asp-route-coinSymbol="@coin.Symbol" asp-route-coinPrice="@coin.Price">
-        <div name="coinSymbol">@coin.Symbol.Replace("USDT", "")</div>
-        <div name="coinPrice">@coin.Price</div>
-        <button type="submit">Add to collection</button>
-    </form>
+    <tr>
+        <form method="post" asp-controller="Home" asp-action="AddCoinToDB" asp-route-coinSymbol="@coin.Symbol" asp-route-coinPrice="@coin.Price">
+            <td>@coin.Symbol.Replace("USDT", "")</td>
+            <td name="coinPrice">@coin.Price</td>
+            <td><button class="btn btn-dark" type="submit">Add to collection</button></td>
+        </form>
+    </tr>
 }
+</table>

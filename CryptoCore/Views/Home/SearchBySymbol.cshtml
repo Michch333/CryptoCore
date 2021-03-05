@@ -1,0 +1,18 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CurrentPriceViewModel
+
+<form asp-controller="Home" asp-action="SearchBySymbol">
+   <p> Search <input type="text" name="symbol" />
+     <input type="submit" value="Search" /></p>
+
+</form>   
+
+@foreach(var coin in Model.Coins)
+{
+    <p>@coin.Symbol.Replace("USDT","")</p>
+    <p>@coin.Price</p>
+}

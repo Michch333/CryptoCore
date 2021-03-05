@@ -8,6 +8,6 @@ namespace CryptoCore.Services.Binance
     public class CoinModel
     {
         public string Symbol { get; set; }
-        public string Price { get; set; }
+        public float Price { get; set; }
     }
 }

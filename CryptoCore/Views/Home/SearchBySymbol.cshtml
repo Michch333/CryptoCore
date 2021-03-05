@@ -13,6 +13,9 @@
 
 @foreach(var coin in Model.Coins)
 {
-    <p>@coin.Symbol.Replace("USDT","")</p>
-    <p>@coin.Price</p>
+    <form method="post" asp-controller="Home" asp-action="AddCoinToDB" asp-route-coinSymbol="@coin.Symbol" asp-route-coinPrice="@coin.Price">
+        <div name="coinSymbol">@coin.Symbol.Replace("USDT", "")</div>
+        <div name="coinPrice">@coin.Price</div>
+        <button type="submit">Add to collection</button>
+    </form>
 }

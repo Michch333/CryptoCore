@@ -8,25 +8,25 @@ namespace CryptoCore.Services.Binance
     public class TickerModel
     {
         public string Symbol { get; set; }
-        public string PriceChange { get; set; }
-        public string PriceChangePercent { get; set; }
-        public string WeightedAvgPrice { get; set; }
-        public string PrevClosePrice { get; set; }
-        public string LastPrice { get; set; }
-        public string LastQty { get; set; }
-        public string BidPrice { get; set; }
-        public string BidQty { get; set; }
-        public string AskPrice { get; set; }
-        public string AskQty { get; set; }
-        public string OpenPrice { get; set; }
-        public string HighPrice { get; set; }
-        public string LowPrice { get; set; }
-        public string Volume { get; set; }
-        public string QuoteVolume { get; set; }
-        public long OpenTime { get; set; }
-        public long CloseTime { get; set; }
-        public int FirstId { get; set; }
-        public int LastId { get; set; }
-        public int Count { get; set; }
+        public float PriceChange { get; set; }
+        public float PriceChangePercent { get; set; }
+        public float WeightedAvgPrice { get; set; }
+        public float PrevClosePrice { get; set; }
+        public float LastPrice { get; set; }
+        public float LastQty { get; set; }
+        public float BidPrice { get; set; }
+        public float BidQty { get; set; }
+        public float AskPrice { get; set; }
+        public float AskQty { get; set; }
+        public float OpenPrice { get; set; }
+        public float HighPrice { get; set; }
+        public float LowPrice { get; set; }
+        public float Volume { get; set; }
+        public float QuoteVolume { get; set; }
+        public float OpenTime { get; set; }
+        public float CloseTime { get; set; }
+        public float FirstId { get; set; }
+        public float LastId { get; set; }
+        public float Count { get; set; }
     }
 }

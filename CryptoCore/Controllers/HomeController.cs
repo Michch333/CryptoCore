@@ -58,6 +58,37 @@ namespace CryptoCore.Controllers
             }
             return coinList;
         }
+        public async Task<List<CoinTickerCombinedModel>> GetAllCoinInfo()
+        {
+
+            var combinedInfo = new List<CoinTickerCombinedModel>();
+            var priceInfoResponse = await _binanceClient.GetCurrentPrice();
+            var newPriceInfoResponse = removeUsdt(priceInfoResponse);
+            var tickerInforesponse = await _binanceClient.GetTwentyFourHourTickerInfo();
+            var newtickerInfoResponse = removeUsdt(tickerInforesponse);
+            foreach (var coin in newPriceInfoResponse)
+               
+            {
+                foreach (var ticker in newtickerInfoResponse)
+                {
+                    if (coin.symbol == ticker.symbol)
+                    {
+                        var tempObject = new CoinTickerCombinedModel();
+                        tempObject.CoinSymbol = coin.symbol;
+                        tempObject.TickerSymbol = ticker.symbol;
+                        tempObject.Price = float.Parse(coin.price);
+                        tempObject.PriceChange = float.Parse(ticker.priceChange);
+                        tempObject.PriceChangePercent = float.Parse(ticker.priceChangePercent);
+                        tempObject.Count = ticker.count;
+                        combinedInfo.Add(tempObject);
+                    }
+                    
+                }
+
+            }
+            return combinedInfo;
+
+        }
 
         public List<CurrentPriceResponse> removeUsdt(List<CurrentPriceResponse> response)
         {
@@ -101,7 +132,7 @@ namespace CryptoCore.Controllers
 
             return View(model);
         }
-        public async Task<IActionResult> SearchBySymbol(string symbol ="BTC")
+        public async Task<IActionResult> SearchBySymbol(string symbol ="DOGE")
         { 
             var model = new CurrentPriceViewModel();
             var curatedList = await ConvertPricesToFloatAndRemoveUsdt();

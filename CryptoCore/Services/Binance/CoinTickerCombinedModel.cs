@@ -10,7 +10,7 @@ namespace CryptoCore.Services.Binance
         public string CoinSymbol { get; set; }
         public float Price { get; set; }
         public string TickerSymbol { get; set; }
-        public float PriceChange { get; set; }
+        public double PriceChange { get; set; }
         public float PriceChangePercent { get; set; }
         public int Count { get; set; }
     }

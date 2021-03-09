@@ -179,12 +179,6 @@ namespace CryptoCore.Controllers
             return View("Index", model);
         }
 
-        //public async Task<IActionResult> AddCombinedDataToDB() 
-        //{ 
-        
-        
-        //}
-
         public IActionResult Privacy()
         {
             return View();

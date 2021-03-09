@@ -34,17 +34,17 @@
                 <ul class="crypto-navigation__list">
 
                     <li class="crypto-navigation__list-item mdc-ripple-surface crypto-navigation__list-item--active">
-                        <a  asp-controller="Home" asp-action="Index">
+                        <a asp-controller="Home" asp-action="Index">
                             <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">timeline</i>
 
-                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline"  asp-controller="Home" asp-action="Index">
+                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline" asp-controller="Home" asp-action="Index">
                                 Dashboard
                             </span>
                         </a>
                     </li>
 
                     <li class="crypto-navigation__list-item mdc-ripple-surface ">
-                        <a  asp-controller="Home" asp-action="Privacy">
+                        <a asp-controller="Home" asp-action="Privacy">
                             <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">account_balance_wallet</i>
 
                             <span class="crypto-navigation__list-item__badge">2</span>
@@ -56,11 +56,11 @@
                     </li>
 
                     <li class="crypto-navigation__list-item mdc-ripple-surface ">
-                        <a href="reports.html">
-                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">bar_chart</i>
+                        <a asp-controller="Home" asp-action="SearchBySymbol">
+                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">search</i>
 
                             <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
-                                Reports
+                                Search Crypto
                             </span>
                         </a>
                     </li>
@@ -79,7 +79,7 @@
                         <a asp-controller="Home" asp-action="SearchBySymbol">
                             <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">category</i>
 
-                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline" >
+                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
                                 Search a coin
                             </span>
                         </a>

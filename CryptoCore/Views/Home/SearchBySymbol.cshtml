@@ -5,25 +5,69 @@
 }
 @model CurrentPriceViewModel
 
-<form asp-controller="Home" asp-action="SearchBySymbol">
-   <p> Search <input type="text" name="symbol" />
-     <input type="submit" value="Search" /></p>
+<div>
+    <form asp-controller="Home" asp-action="SearchBySymbol">
+        <p>
+            Search <input type="text" name="symbol" />
+            <input type="submit" value="Search" />
+        </p>
+    </form>
 
-</form>   
-<table class="table">
-<tr>
-    <th>Coin Symbol</th>
-    <th>Price</th>
-    <th>Add</th>
-</tr>
-@foreach(var coin in Model.Coins)
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var coin in Model.Coins)
+            {
+                <tr>
+                    <th scope="row">@coin.Symbol.Replace("USDT", "")</th>
+                    <td>$@coin.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@section Scripts
 {
-    <tr>
-        <form method="post" asp-controller="Home" asp-action="AddCoinToDB" asp-route-coinSymbol="@coin.Symbol" asp-route-coinPrice="@coin.Price">
-            <td>@coin.Symbol.Replace("USDT", "")</td>
-            <td name="coinPrice">@coin.Price</td>
-            <td><button class="btn btn-dark" type="submit">Add to collection</button></td>
-        </form>
-    </tr>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <!-- Required MDC Web JavaScript library -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 }
-</table>

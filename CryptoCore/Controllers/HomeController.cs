@@ -62,24 +62,22 @@ namespace CryptoCore.Controllers
         {
 
             var combinedInfo = new List<CoinTickerCombinedModel>();
-            var priceInfoResponse = await _binanceClient.GetCurrentPrice();
-            var newPriceInfoResponse = removeUsdt(priceInfoResponse);
-            var tickerInforesponse = await _binanceClient.GetTwentyFourHourTickerInfo();
-            var newtickerInfoResponse = removeUsdt(tickerInforesponse);
-            foreach (var coin in newPriceInfoResponse)
+            var priceList = await ConvertPricesToFloatAndRemoveUsdt();
+            var tickerList = await ConvertTickerToFloatAndRemoveUsdt();
+            foreach (var coin in priceList)
                
             {
-                foreach (var ticker in newtickerInfoResponse)
+                foreach (var ticker in tickerList)
                 {
-                    if (coin.symbol == ticker.symbol)
+                    if (coin.Symbol == ticker.Symbol)
                     {
                         var tempObject = new CoinTickerCombinedModel();
-                        tempObject.CoinSymbol = coin.symbol;
-                        tempObject.TickerSymbol = ticker.symbol;
-                        tempObject.Price = float.Parse(coin.price);
-                        tempObject.PriceChange = float.Parse(ticker.priceChange);
-                        tempObject.PriceChangePercent = float.Parse(ticker.priceChangePercent);
-                        tempObject.Count = ticker.count;
+                        tempObject.CoinSymbol = coin.Symbol;
+                        tempObject.TickerSymbol = ticker.Symbol;
+                        tempObject.Price =coin.Price;
+                        tempObject.PriceChange =ticker.PriceChange;
+                        tempObject.PriceChangePercent =ticker.PriceChangePercent;
+                        tempObject.Count = ticker.Count;
                         combinedInfo.Add(tempObject);
                     }
                     

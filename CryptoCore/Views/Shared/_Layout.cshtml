@@ -4,49 +4,150 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CryptoCore</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/images/symbollogo.png" rel="shortcut icon" type="image/x-icon" />
+    <!-- load Google fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons%7CPlayfair+Display:400,400i,700%7CRoboto+Condensed:400,700" rel="stylesheet">
+    <!-- Crypto Styles -->
+    <link id="crypto-stylesheet" rel="stylesheet" href="~/Content/css/night-gold-orange.css">
+
+    <!-- page specific CSS -->
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CryptoCore</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SearchBySymbol">Search a coin</a>
-                        </li>
-                    </ul>
-                </div>
+<body class="mdc-typography pace-on mdc-theme--background crypro-theme-gradient">
+    <div class="crypto-loader"></div>
+    <div class="crypto-wrapper">
+        <div class="crypto-sidenav">
+            <nav class="crypto-navigation">
+                <a href="index.html" class="crypto-navigation__logo">
+                    <!-- Image element or even SVG can be used here -->
+                    <img src="~/images/fulllogo.png" alt="Crypto" class="crypto-navigation__logo-image">
+
+
+                    @*<svg height="40" viewBox="0 0 40 40" width="40" xmlns="http://www.w3.org/2000/svg">
+                            <g fill-rule="nonzero" transform="translate(22 22)">
+                                <path d="m0 3.64v14.26c9.44-.94 16.96-8.46 17.9-17.9h-14.26c-.62 1.7-1.94 3.02-3.64 3.64z" fill="var(--mdc-theme-primary-800)" />
+                                <path d="m-22-2c0 10.38 7.9 18.9 18 19.9v-14.26c-2.32-.84-4-3.04-4-5.64s1.68-4.8 4-5.64v-14.26c-10.1 1-18 9.52-18 19.9z" fill="var(--mdc-theme-primary-200)" />
+                                <path d="m3.64-4h14.26c-.94-9.44-8.46-16.96-17.9-17.9v14.26c1.7.62 3.02 1.94 3.64 3.64z" fill="var(--mdc-theme-primary-600)" />
+                            </g>
+                        </svg>*@
+
+                </a>
+                <ul class="crypto-navigation__list">
+
+                    <li class="crypto-navigation__list-item mdc-ripple-surface crypto-navigation__list-item--active">
+                        <a  asp-controller="Home" asp-action="Index">
+                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">timeline</i>
+
+                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline"  asp-controller="Home" asp-action="Index">
+                                Dashboard
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="crypto-navigation__list-item mdc-ripple-surface ">
+                        <a  asp-controller="Home" asp-action="Privacy">
+                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">account_balance_wallet</i>
+
+                            <span class="crypto-navigation__list-item__badge">2</span>
+
+                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
+                                Wallet
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="crypto-navigation__list-item mdc-ripple-surface ">
+                        <a href="reports.html">
+                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">bar_chart</i>
+
+                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
+                                Reports
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="crypto-navigation__list-item mdc-ripple-surface ">
+                        <a href="profile.html">
+                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">person</i>
+
+                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
+                                Profile
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="crypto-navigation__list-item mdc-ripple-surface ">
+                        <a asp-controller="Home" asp-action="SearchBySymbol">
+                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">category</i>
+
+                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline" >
+                                Search a coin
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="crypto-navigation__list-item mdc-ripple-surface ">
+                        <a href="login.html">
+                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">power_settings_new</i>
+
+                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
+                                Logout
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+
+        </div>
+        @RenderBody()
+        <div class="crypto-menu-switches">
+            <div class="crypto-menu-switches--handle">
+                <i class="material-icons">settings</i>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            <!-- RTL switch -->
+            <div class="switch-wrapper mdc-theme--on-primary">
+                <div class="mdc-switch crypto-rtl-switch-selector">
+                    <div class="mdc-switch__track"></div>
+                    <div class="mdc-switch__thumb-underlay">
+                        <div class="mdc-switch__thumb">
+                            <input type="checkbox" id="rtl-switch" class="mdc-switch__native-control" role="switch" aria-checked="false">
+                        </div>
+                    </div>
+                </div>
+                <label for="rtl-switch">RTL</label>
+            </div>
+            <!-- theme switch -->
+            <div class="switch-wrapper mdc-theme--on-primary">
+                <div class="mdc-switch crypto-theme-switch-selector">
+                    <div class="mdc-switch__track"></div>
+                    <div class="mdc-switch__thumb-underlay">
+                        <div class="mdc-switch__thumb">
+                            <input type="checkbox" id="crypto-theme-switch" class="mdc-switch__native-control" role="switch" aria-checked="false">
+                        </div>
+                    </div>
+
+                </div>
+                <label for="crypto-theme-switch">Switch theme</label>
+            </div>
+        </div>
+
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - CryptoCore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/Content/js/material-components-web.min.js"></script>
+    <script>mdc.autoInit()</script>
+    <!-- initialise marquee js -->
+    <script src="~/Content/js/marquee3k.js"></script>
+    <script>Marquee3k.init()</script>
+    <!-- layout js -->
+    <script data-pace-options='{ "ajax": false, "restartOnRequestAfter": false }' src="~/Content/js/pace.min.js"></script>
+    <script src="~/Content/js/apexcharts.min.js"></script>
+    <!-- switcher js -->
+    <script src="~/Content/js/partials/switcher.js"></script>
+    <!-- page specific JS -->
+
+    <script src="~/Content/js/pages/index.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+

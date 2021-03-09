@@ -58,6 +58,35 @@ namespace CryptoCore.Controllers
             }
             return coinList;
         }
+        public async Task<List<CoinTickerCombinedModel>> GetAllCoinInfo()
+        {
+
+            var combinedInfo = new List<CoinTickerCombinedModel>();
+            var priceList = await ConvertPricesToFloatAndRemoveUsdt();
+            var tickerList = await ConvertTickerToFloatAndRemoveUsdt();
+            foreach (var coin in priceList)
+               
+            {
+                foreach (var ticker in tickerList)
+                {
+                    if (coin.Symbol == ticker.Symbol)
+                    {
+                        var tempObject = new CoinTickerCombinedModel();
+                        tempObject.CoinSymbol = coin.Symbol;
+                        tempObject.TickerSymbol = ticker.Symbol;
+                        tempObject.Price =coin.Price;
+                        tempObject.PriceChange =ticker.PriceChange;
+                        tempObject.PriceChangePercent =ticker.PriceChangePercent;
+                        tempObject.Count = ticker.Count;
+                        combinedInfo.Add(tempObject);
+                    }
+                    
+                }
+
+            }
+            return combinedInfo;
+
+        }
 
         public List<CurrentPriceResponse> removeUsdt(List<CurrentPriceResponse> response)
         {
@@ -101,7 +130,7 @@ namespace CryptoCore.Controllers
 
             return View(model);
         }
-        public async Task<IActionResult> SearchBySymbol(string symbol ="BTC")
+        public async Task<IActionResult> SearchBySymbol(string symbol ="DOGE")
         { 
             var model = new CurrentPriceViewModel();
             var curatedList = await ConvertPricesToFloatAndRemoveUsdt();

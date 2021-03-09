@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using CryptoCore.Data;
 using CryptoCore.Models.DALModels;
 using System.Collections.Generic;
+using CryptoCore.Services.Reddit;
+using System;
+
 using CryptoCore.Models.ViewModels;
 
 namespace CryptoCore.Controllers
@@ -16,12 +19,14 @@ namespace CryptoCore.Controllers
     public class HomeController : Controller
     {
         private readonly BinanceClient _binanceClient;
+        private readonly RedditClient _redditClient;
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger, BinanceClient binanceClient, ApplicationDbContext dbContext)
+        public HomeController(ILogger<HomeController> logger, BinanceClient binanceClient, RedditClient redditClient, ApplicationDbContext dbContext)
         {
             _binanceClient = binanceClient;
+            _redditClient = redditClient;
             _logger = logger;
             _db = dbContext;
         }
@@ -41,6 +46,19 @@ namespace CryptoCore.Controllers
             }
             return coinList;
         }
+        //public async Task<List<RedditModel>> GetRedditData()
+        //{
+        //    var redditList = new List<RedditModel>();
+        //    var redditResponse = await _redditClient.GetRedditSearchInfo();
+        //    TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+        //    foreach (var post in redditResponse.data.children)
+        //    {
+        //        var timeInUtc = DateTime.Parse(post.data.created_utc.ToString());
+        //        DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(timeInUtc, cstZone);
+        //    }
+
+
+        //}
 
         public async Task<List<TickerModel>> ConvertTickerToFloatAndRemoveUsdt()
         {

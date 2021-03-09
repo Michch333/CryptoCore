@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using CryptoCore.Services.Reddit;
 using System;
 
+using CryptoCore.Models.ViewModels;
+
 namespace CryptoCore.Controllers
 {
     public class HomeController : Controller
@@ -69,7 +71,7 @@ namespace CryptoCore.Controllers
                 var tempObject = new TickerModel();
                 tempObject.Symbol = coin.symbol;
                 tempObject.PriceChangePercent = float.Parse(coin.priceChangePercent);
-                tempObject.PriceChange = float.Parse(coin.priceChange);
+                //tempObject.PriceChange = double.Parse(coin.priceChange);
                 tempObject.Count = coin.count;
                 coinList.Add(tempObject);
             }
@@ -141,8 +143,8 @@ namespace CryptoCore.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = new CurrentPriceViewModel();
-            model.Coins = await ConvertPricesToFloatAndRemoveUsdt();
+            var model = new CoinTickerCombinedViewModel();
+            model.CombinedInfo = await GetAllCoinInfo();
 
 
             return View(model);

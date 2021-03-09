@@ -8,7 +8,7 @@ namespace CryptoCore.Services.Binance
     public class TickerModel
     {
         public string Symbol { get; set; }
-        public float PriceChange { get; set; }
+        public double PriceChange { get; set; }
         public float PriceChangePercent { get; set; }
         public float WeightedAvgPrice { get; set; }
         public float PrevClosePrice { get; set; }

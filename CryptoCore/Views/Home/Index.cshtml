@@ -1,20 +1,53 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model CurrentPriceViewModel
+@model CryptoCore.Models.ViewModels.CoinTickerCombinedViewModel
+  
+<main class="crypto-main">
+
+    <div class="crypto-main__content mdc-theme--text-primary-on-background">
+        <div class="crypto-marquee__wrapper">
+            <div class="crypto-marquee marquee3k" data-speed="0.40" data-pausable="true">
+                <div class="marquee3k__wrapper">
+                    <!-- start of ticker -->
+                    @foreach (var coin in Model.CombinedInfo)
+                    {
+
+                        <div class="crypto-marquee__item">
+                            <h3 class="crypto-marquee__item-logo">
+                                <!-- Image or SVG here -->
+                             
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" class="crypto-marquee__item-logo-img">
+                                        <g>
+                                            <g>
+                                                <mask fill="white">
+                                                    <use xlink:href="#path-1"></use>
+                                                </mask>
+                                                <use fill-rule="nonzero" xlink:href="#path-2"></use>
+                                            </g>
+                                        </g>
+                                    </g>
+                               
+                                <span>@coin.CoinSymbol.Replace("USDT", "")</span>
+                            </h3>
+
+                            <div class="crypto-marquee__item-percentage mdc-tab__crypto-stat-caption--trend-down">
+                                <i class="material-icons">trending_down</i>
+                                @coin.PriceChangePercent%
+                            </div>
+                            <div class="crypto-marquee__item-value mdc-theme--primary">
+                                <small>$</small> @coin.Price 
+                            </div>
+                            <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-down"> @coin.PriceChange</div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
 
 
-<table class="table">
-    <tr style="border-bottom: 3px solid black">
-        <th>Symbol</th>
-        <th>Price</th>
-    </tr>
-    
-    @foreach(var coin in Model.Coins)
-    {
-        <tr>
-            <td style="font-weight:bold">@coin.Symbol.Replace("USDT","")</td>
-            <td>$@coin.Price</td>
-        </tr>
-    }
-</table>
+

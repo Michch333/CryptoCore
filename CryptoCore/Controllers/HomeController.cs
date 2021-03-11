@@ -13,6 +13,7 @@ using CryptoCore.Services.Reddit;
 using System;
 
 using CryptoCore.Models.ViewModels;
+using System.Linq;
 
 namespace CryptoCore.Controllers
 {
@@ -36,7 +37,7 @@ namespace CryptoCore.Controllers
 
             var coinList = new List<CoinModel>();
             var response = await _binanceClient.GetCurrentPrice();
-            var newResponse = removeUsdt(response);
+            var newResponse = RemoveUsdt(response);
             foreach (var coin in newResponse)
             {
                 var tempObject = new CoinModel();
@@ -65,7 +66,7 @@ namespace CryptoCore.Controllers
 
             var coinList = new List<TickerModel>();
             var response = await _binanceClient.GetTwentyFourHourTickerInfo();
-            var newResponse = removeUsdt(response);
+            var newResponse = RemoveUsdt(response);
             foreach (var coin in newResponse)
             {
                 var tempObject = new TickerModel();
@@ -107,7 +108,7 @@ namespace CryptoCore.Controllers
 
         }
 
-        public List<CurrentPriceResponse> removeUsdt(List<CurrentPriceResponse> response)
+        public List<CurrentPriceResponse> RemoveUsdt(List<CurrentPriceResponse> response)
         {
             var pickles = new List<CurrentPriceResponse>();
             foreach (var coin in response)
@@ -123,7 +124,7 @@ namespace CryptoCore.Controllers
             }
             return pickles;
         }
-        public List<TickerResponse> removeUsdt(List<TickerResponse> response)
+        public List<TickerResponse> RemoveUsdt(List<TickerResponse> response)
         {
             var pickles = new List<TickerResponse>();
             foreach (var coin in response)
@@ -161,13 +162,42 @@ namespace CryptoCore.Controllers
             _db.Coins.Add(tempCoin);
             _db.SaveChanges();
         }
+        public async void AddCoinInfoToDatabase(string symbol)
+        {
+            var results = await SearchBySymbol(symbol);
+            foreach (var coin in results)
+            {
+                var newDAL = new CoinDAL();
+                newDAL.Price = coin.Price;
+                newDAL.Symbol = coin.CoinSymbol;
+                newDAL.Count = 69; // TODO - Cant access count because its something already
+                _db.Coins.Add(newDAL);
+            }
+            _db.SaveChanges();
+        }
+        public async void AddCoinInfoToDatabase()
+        {
+            var results = await GetAllCoinInfo();
+            foreach (var coin in results)
+            {
+                var newDAL = new CoinDAL();
+                newDAL.Price = coin.Price;
+                newDAL.Symbol = coin.CoinSymbol;
+                newDAL.Count = coin.Count;
+                _db.Coins.Add(newDAL);
+            }
+            _db.SaveChanges();
+        }
+        public List<CoinDAL> GetCoinInfoFromDatabase(string symbol)
+        {
+            var listOfCoinRecords = _db.Coins.Where(s => s.Symbol == symbol).ToList<CoinDAL>();
+            return listOfCoinRecords;
+        }
 
         public async Task<IActionResult> Index()
         {
             var model = new CoinTickerCombinedViewModel();
             model.CombinedInfo = await GetAllCoinInfo();
-
-
             return View(model);
         }
 
@@ -186,7 +216,7 @@ namespace CryptoCore.Controllers
             foreach (var coin in curatedList)
             {
 
-                if (coin.CoinSymbol.Contains(upperSymbol)) 
+                if (coin.CoinSymbol.Contains(upperSymbol))
                 {
                     var tempObject = new CoinTickerCombinedModel();
                     tempObject.CoinSymbol = coin.CoinSymbol;
@@ -199,6 +229,26 @@ namespace CryptoCore.Controllers
             }
             return searchedCoin;
         }
+        public async Task<CoinTickerCombinedModel> SearchBySymbolExact(string symbol = "DOGE")
+        {
+            var upperSymbol = symbol.ToUpper();
+            var searchedCoin = new CoinTickerCombinedModel();
+            var curatedList = await GetAllCoinInfo();
+            foreach (var coin in curatedList)
+            {
+
+                if (coin.CoinSymbol.Contains(upperSymbol)) 
+                {
+                    searchedCoin.CoinSymbol = coin.CoinSymbol;
+                    searchedCoin.Price = coin.Price;
+                    searchedCoin.PriceChange = coin.PriceChange;
+                    searchedCoin.PriceChangePercent = coin.PriceChangePercent;
+                    searchedCoin.Count = coin.Count;
+                }
+            }
+            return searchedCoin;
+        }
+
 
         public IActionResult Privacy()
         {

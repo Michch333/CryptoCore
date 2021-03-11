@@ -149,19 +149,23 @@ namespace CryptoCore.Controllers
 
             return View(model);
         }
-        public async Task<IActionResult> SearchBySymbol(string symbol ="DOGE")
-        { 
-            var model = new CurrentPriceViewModel();
-            var curatedList = await ConvertPricesToFloatAndRemoveUsdt();
+        public async Task<IActionResult> SearchBySymbol(string symbol = "DOGE")
+        {
+            var upperSymbol = symbol.ToUpper();
+            var model = new CoinTickerCombinedViewModel();
+            var curatedList = await GetAllCoinInfo();
             foreach (var coin in curatedList)
             {
 
-                if (coin.Symbol.Contains(symbol)) 
+                if (coin.CoinSymbol.Contains(upperSymbol)) 
                 {
-                    var tempObject = new CoinModel();
-                    tempObject.Symbol = coin.Symbol;
+                    var tempObject = new CoinTickerCombinedModel();
+                    tempObject.CoinSymbol = coin.CoinSymbol;
                     tempObject.Price = coin.Price;
-                    model.Coins.Add(tempObject);
+                    tempObject.PriceChange = coin.PriceChange;
+                    tempObject.PriceChangePercent = coin.PriceChangePercent;
+                    tempObject.Count = coin.Count;
+                    model.CombinedInfo.Add(tempObject);
                 }
             }
             return View(model);

@@ -16,7 +16,7 @@ namespace CryptoCore.Services.Reddit
         {
             var result = await _client.GetAsync($"/search.json?q={search}");
 
-            if (result.IsSuccessStatusCode)
+            if (result.IsSuccessStatusCode && result != null)
             {
                 var stringContent = await result.Content.ReadAsStringAsync();
 

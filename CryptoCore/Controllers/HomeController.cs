@@ -84,7 +84,7 @@ namespace CryptoCore.Controllers
             var priceList = await ConvertPricesToFloatAndRemoveUsdt();
             var tickerList = await ConvertTickerToFloatAndRemoveUsdt();
             foreach (var coin in priceList)
-               
+
             {
                 foreach (var ticker in tickerList)
                 {
@@ -93,13 +93,13 @@ namespace CryptoCore.Controllers
                         var tempObject = new CoinTickerCombinedModel();
                         tempObject.CoinSymbol = coin.Symbol;
                         tempObject.TickerSymbol = ticker.Symbol;
-                        tempObject.Price =coin.Price;
-                        tempObject.PriceChange =ticker.PriceChange;
-                        tempObject.PriceChangePercent =ticker.PriceChangePercent;
+                        tempObject.Price = coin.Price;
+                        tempObject.PriceChange = ticker.PriceChange;
+                        tempObject.PriceChangePercent = ticker.PriceChangePercent;
                         tempObject.Count = ticker.Count;
                         combinedInfo.Add(tempObject);
                     }
-                    
+
                 }
 
             }
@@ -119,7 +119,7 @@ namespace CryptoCore.Controllers
                     tempObject.price = coin.price;
                     pickles.Add(tempObject);
                 }
-                
+
             }
             return pickles;
         }
@@ -170,10 +170,18 @@ namespace CryptoCore.Controllers
 
             return View(model);
         }
-        public async Task<IActionResult> SearchBySymbol(string symbol = "DOGE")
+
+        public async Task<IActionResult> DisplaySearchInfo(string symbol = "DOGE")
+        {
+            var model = new CoinTickerCombinedViewModel();
+            model.CombinedInfo = await SearchBySymbol(symbol);
+
+            return View(model);
+        }
+        public async Task<List<CoinTickerCombinedModel>> SearchBySymbol(string symbol = "DOGE")
         {
             var upperSymbol = symbol.ToUpper();
-            var model = new CoinTickerCombinedViewModel();
+            var searchedCoin = new List<CoinTickerCombinedModel>();
             var curatedList = await GetAllCoinInfo();
             foreach (var coin in curatedList)
             {
@@ -186,10 +194,10 @@ namespace CryptoCore.Controllers
                     tempObject.PriceChange = coin.PriceChange;
                     tempObject.PriceChangePercent = coin.PriceChangePercent;
                     tempObject.Count = coin.Count;
-                    model.CombinedInfo.Add(tempObject);
+                    searchedCoin.Add(tempObject);
                 }
             }
-            return View(model);
+            return searchedCoin;
         }
 
         public IActionResult Privacy()

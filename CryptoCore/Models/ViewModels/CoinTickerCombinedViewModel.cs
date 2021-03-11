@@ -10,8 +10,9 @@ namespace CryptoCore.Models.ViewModels
     {
         public CoinTickerCombinedViewModel()
         {
-            CombinedInfo = new List<CoinTickerCombinedModel>();
+            SearchInfo = new List<CoinTickerCombinedModel>();
         }
-        public List<CoinTickerCombinedModel> CombinedInfo { get; set; }
+        public List<CoinTickerCombinedModel> SearchInfo { get; set; }
+        public List<CoinTickerCombinedModel> AllInfo { get; set; };
     }
 }

@@ -47,10 +47,10 @@ namespace CryptoCore.Controllers
             }
             return coinList;
         }
-        public async Task<List<RedditModel>> GetRedditData()
+        public async Task<List<RedditModel>> SearchReddit(string search)
         {
             var redditList = new List<RedditModel>();
-            var redditResponse = await _redditClient.GetRedditSearchInfo();
+            var redditResponse = await _redditClient.GetRedditSearchInfo(search);
             TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
             foreach (var post in redditResponse.data.children)
             {
@@ -205,14 +205,15 @@ namespace CryptoCore.Controllers
         public async Task<IActionResult> Index()
         {
             var model = new CoinTickerCombinedViewModel();
-            model.CombinedInfo = await GetAllCoinInfo();
+            model.SearchInfo = await GetAllCoinInfo();
             return View(model);
         }
 
         public async Task<IActionResult> DisplaySearchInfo(string symbol = "DOGE")
         {
             var model = new CoinTickerCombinedViewModel();
-            model.CombinedInfo = await SearchBySymbol(symbol);
+            model.SearchInfo = await SearchBySymbol(symbol);
+            model.AllInfo = await GetAllCoinInfo();
 
             return View(model);
         }

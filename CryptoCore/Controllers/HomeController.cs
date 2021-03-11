@@ -201,11 +201,16 @@ namespace CryptoCore.Controllers
             var listOfCoinRecords = _db.Coins.Where(s => s.Symbol == symbol).ToList<CoinDAL>();
             return listOfCoinRecords;
         }
+        public List<CoinDAL> GetCoinInfoFromDatabase()
+        {
+            var listOfCoinRecords = _db.Coins.Where(s => s.CoinId > 0).ToList<CoinDAL>();
+            return listOfCoinRecords;
+        }
 
         public async Task<IActionResult> Index()
         {
             var model = new CoinTickerCombinedViewModel();
-            model.SearchInfo = await GetAllCoinInfo();
+            model.AllInfo = await GetAllCoinInfo();
             return View(model);
         }
 

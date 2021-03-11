@@ -13,6 +13,6 @@ namespace CryptoCore.Models.ViewModels
             SearchInfo = new List<CoinTickerCombinedModel>();
         }
         public List<CoinTickerCombinedModel> SearchInfo { get; set; }
-        public List<CoinTickerCombinedModel> AllInfo { get; set; };
+        public List<CoinTickerCombinedModel> AllInfo{ get; set; }
     }
 }

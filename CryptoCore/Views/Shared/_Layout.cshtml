@@ -113,33 +113,44 @@
                             @foreach (var coin in Model.AllInfo)
                             {
 
-                                <div class="crypto-marquee__item">
-                                    <h3 class="crypto-marquee__item-logo">
-                                        <!-- Image or SVG here -->
+                            <div class="crypto-marquee__item">
+                                <h3 class="crypto-marquee__item-logo">
+                                    <!-- Image or SVG here -->
 
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" class="crypto-marquee__item-logo-img">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" class="crypto-marquee__item-logo-img">
+                                        <g>
                                             <g>
-                                                <g>
-                                                    <mask fill="white">
-                                                        <use xlink:href="#path-1"></use>
-                                                    </mask>
-                                                    <use fill-rule="nonzero" xlink:href="#path-2"></use>
-                                                </g>
+                                                <mask fill="white">
+                                                    <use xlink:href="#path-1"></use>
+                                                </mask>
+                                                <use fill-rule="nonzero" xlink:href="#path-2"></use>
                                             </g>
                                         </g>
+                                    </g>
 
-                                        <span>@coin.CoinSymbol.Replace("USDT", "")</span>
-                                    </h3>
+                                    <span>@coin.CoinSymbol.Replace("USDT", "")</span>
+                                </h3>
 
+                                @if (coin.PriceChangePercent > 0)
+                                {
+                                    <div class="crypto-marquee__item-percentage mdc-tab__crypto-stat-caption--trend-up">
+                                        <i class="material-icons" style="color: green">trending_up</i>
+                                        @coin.PriceChangePercent%
+                                    </div>
+                                }
+                                else
+                                {
                                     <div class="crypto-marquee__item-percentage mdc-tab__crypto-stat-caption--trend-down">
                                         <i class="material-icons">trending_down</i>
                                         @coin.PriceChangePercent%
                                     </div>
-                                    <div class="crypto-marquee__item-value mdc-theme--primary">
-                                        <small>$</small> @coin.Price
-                                    </div>
-                                    <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-down"> @coin.PriceChange</div>
+
+                                }
+                                <div class="crypto-marquee__item-value mdc-theme--primary">
+                                    <small>$</small> @coin.Price
                                 </div>
+                                <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-down"> @coin.PriceChange</div>
+                            </div>
 
                             }
                         </div>

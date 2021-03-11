@@ -245,6 +245,24 @@ namespace CryptoCore.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> UserWallet()
+        {
+            var model = new UserWalletViewModel();
+            model.AllInfo = await GetAllCoinInfo();
+            var listOfCoins = _db.AllWalletInfo.Where(e => e.UserID == 1).ToList(); // TODO - Hard Coding User id
+            foreach (var followedCoin in listOfCoins)
+            {
+                //var response = await SearchReddit(followedCoin.Symbol);
+                //foreach (var item in response)
+                //{
+                //    model.RedditPosts.Add(item);
+                //}
+                var coinInfo = await SearchBySymbolExact(followedCoin.Symbol);
+                model.WatchedCoinInfo.Add(coinInfo);
+            }
+            return View(model);
+        }
+
         public async Task<IActionResult> DisplaySearchInfo(string symbol = "DOGE")
         {
             var model = new CoinTickerCombinedViewModel();

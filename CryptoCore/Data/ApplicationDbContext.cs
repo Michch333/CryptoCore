@@ -14,5 +14,6 @@ namespace CryptoCore.Data
         {
         }
         public DbSet<CoinDAL> Coins { get; set; }
+        public DbSet<WalletDAL> AllWalletInfo { get; set; }
     }
 }

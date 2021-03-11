@@ -140,6 +140,27 @@ namespace CryptoCore.Controllers
             }
             return pickles;
         }
+        public void AddCoinInfoToDatabase(CoinTickerCombinedModel coinInfo)
+        {
+            var tempCoin = new CoinDAL();
+            tempCoin.Symbol = coinInfo.CoinSymbol;
+            tempCoin.Price = coinInfo.Price;
+            tempCoin.Count = coinInfo.Count;
+
+            _db.Coins.Add(tempCoin);
+            _db.SaveChanges();
+        }
+        public void AddCoinInfoToDatabase(CoinTickerCombinedModel coinInfo, DateTime time)
+        {
+            var tempCoin = new CoinDAL();
+            tempCoin.Symbol = coinInfo.CoinSymbol;
+            tempCoin.Price = coinInfo.Price;
+            tempCoin.Count = coinInfo.Count;
+            tempCoin.EntryTime = time;
+
+            _db.Coins.Add(tempCoin);
+            _db.SaveChanges();
+        }
 
         public async Task<IActionResult> Index()
         {
@@ -169,20 +190,6 @@ namespace CryptoCore.Controllers
                 }
             }
             return View(model);
-        }
-        public async Task<IActionResult> AddCoinToDB(string coinSymbol, float coinPrice)
-        {
-            var emptyCoin = new CoinDAL();
-            emptyCoin.Symbol = coinSymbol.Replace("USDT", "");
-            emptyCoin.Price = coinPrice;
-            emptyCoin.HighAlertThreshold = coinPrice * 1.10f;
-            emptyCoin.LowAlertThreshold = coinPrice * 0.90f;
-
-            _db.Add(emptyCoin);
-            _db.SaveChanges();
-            var model = new CurrentPriceViewModel();
-            model.Coins = await ConvertPricesToFloatAndRemoveUsdt();
-            return View("Index", model);
         }
 
         public IActionResult Privacy()

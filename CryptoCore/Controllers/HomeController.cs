@@ -80,7 +80,7 @@ namespace CryptoCore.Controllers
                 var tempObject = new TickerModel();
                 tempObject.Symbol = coin.symbol;
                 tempObject.PriceChangePercent = float.Parse(coin.priceChangePercent);
-                //tempObject.PriceChange = double.Parse(coin.priceChange);
+                tempObject.PriceChange = double.Parse(coin.priceChange);
                 tempObject.Count = coin.count;
                 coinList.Add(tempObject);
             }
@@ -142,6 +142,7 @@ namespace CryptoCore.Controllers
                     var tempObject = new TickerResponse();
                     tempObject.symbol = coin.symbol;
                     tempObject.priceChangePercent = coin.priceChangePercent;
+                    tempObject.priceChange = coin.priceChange;
                     tempObject.count = coin.count;
                     pickles.Add(tempObject);
                 }

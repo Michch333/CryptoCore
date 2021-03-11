@@ -146,10 +146,20 @@
                                     </div>
 
                                 }
-                                <div class="crypto-marquee__item-value mdc-theme--primary">
+                                @if (coin.PriceChangePercent > 0)
+                                {
+                                    <div class="crypto-marquee__item-value mdc-theme--primary">
+                                        <small>$</small> @coin.Price
+                                    </div>
+                                    <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-up"> @coin.PriceChange</div>
+                                }
+                                else
+                                {
+                                    <div class="crypto-marquee__item-value mdc-theme--primary">
                                     <small>$</small> @coin.Price
-                                </div>
-                                <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-down"> @coin.PriceChange</div>
+                                    </div>
+                                    <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-down"> @coin.PriceChange</div>
+                                }
                             </div>
 
                             }

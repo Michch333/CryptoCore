@@ -175,6 +175,19 @@ namespace CryptoCore.Controllers
             }
             _db.SaveChanges();
         }
+        public async void AddCoinInfoToDatabase()
+        {
+            var results = await GetAllCoinInfo();
+            foreach (var coin in results)
+            {
+                var newDAL = new CoinDAL();
+                newDAL.Price = coin.Price;
+                newDAL.Symbol = coin.CoinSymbol;
+                newDAL.Count = coin.Count;
+                _db.Coins.Add(newDAL);
+            }
+            _db.SaveChanges();
+        }
         public List<CoinDAL> GetCoinInfoFromDatabase(string symbol)
         {
             var listOfCoinRecords = _db.Coins.Where(s => s.Symbol == symbol).ToList<CoinDAL>();

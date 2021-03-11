@@ -196,6 +196,36 @@ namespace CryptoCore.Controllers
             }
             _db.SaveChanges();
         }
+        public void AddCoinPreferenceToDatabase(string symbol, int high, int low)
+        {
+            var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID == 1 && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coded UserID
+            if (matchedRecord != null)
+            {
+                matchedRecord.UserHigh = high;
+                matchedRecord.UserLow = low;
+                _db.Update(matchedRecord);
+            }
+            else
+            {
+                var newEntry = new WalletDAL();
+                newEntry.Symbol = symbol;
+                newEntry.UserHigh = high;
+                newEntry.UserLow = low;
+                newEntry.TimeAddedToWallet = DateTime.Now;
+                newEntry.UserID = 1;
+                _db.AllWalletInfo.Add(newEntry);
+            }
+            _db.SaveChanges();
+        }
+        public void RemoveCoinPreference(string symbol) // TODO - Hard Coded user ID 
+        {
+            var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID == 1 && e.Symbol == symbol).FirstOrDefault();
+            if (matchedRecord != null)
+            {
+                _db.AllWalletInfo.Remove(matchedRecord);
+            }
+            _db.SaveChanges();
+        }
         public List<CoinDAL> GetCoinInfoFromDatabase(string symbol)
         {
             var listOfCoinRecords = _db.Coins.Where(s => s.Symbol == symbol).ToList<CoinDAL>();

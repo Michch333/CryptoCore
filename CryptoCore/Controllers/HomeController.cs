@@ -173,14 +173,15 @@ namespace CryptoCore.Controllers
 
         public async Task<IActionResult> DisplaySearchInfo(string symbol = "DOGE")
         {
-            var model = await SearchBySymbol(symbol);
+            var model = new CoinTickerCombinedViewModel();
+            model.CombinedInfo = await SearchBySymbol(symbol);
 
             return View(model);
         }
-        public async Task<CoinTickerCombinedViewModel> SearchBySymbol(string symbol = "DOGE")
+        public async Task<List<CoinTickerCombinedModel>> SearchBySymbol(string symbol = "DOGE")
         {
             var upperSymbol = symbol.ToUpper();
-            var searchedCoin = new CoinTickerCombinedViewModel();
+            var searchedCoin = new List<CoinTickerCombinedModel>();
             var curatedList = await GetAllCoinInfo();
             foreach (var coin in curatedList)
             {
@@ -193,7 +194,7 @@ namespace CryptoCore.Controllers
                     tempObject.PriceChange = coin.PriceChange;
                     tempObject.PriceChangePercent = coin.PriceChangePercent;
                     tempObject.Count = coin.Count;
-                    searchedCoin.CombinedInfo.Add(tempObject);
+                    searchedCoin.Add(tempObject);
                 }
             }
             return searchedCoin;

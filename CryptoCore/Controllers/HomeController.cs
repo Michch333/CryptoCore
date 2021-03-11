@@ -47,19 +47,27 @@ namespace CryptoCore.Controllers
             }
             return coinList;
         }
-        //public async Task<List<RedditModel>> GetRedditData()
-        //{
-        //    var redditList = new List<RedditModel>();
-        //    var redditResponse = await _redditClient.GetRedditSearchInfo();
-        //    TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
-        //    foreach (var post in redditResponse.data.children)
-        //    {
-        //        var timeInUtc = DateTime.Parse(post.data.created_utc.ToString());
-        //        DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(timeInUtc, cstZone);
-        //    }
+        public async Task<List<RedditModel>> GetRedditData()
+        {
+            var redditList = new List<RedditModel>();
+            var redditResponse = await _redditClient.GetRedditSearchInfo();
+            TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            foreach (var post in redditResponse.data.children)
+            {
+                var tempObject = new RedditModel();
+                var timeInUtc = DateTime.Parse(post.data.created_utc.ToString());
+                DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(timeInUtc, cstZone);
+                tempObject.Title = post.data.title;
+                tempObject.SubReddit = post.data.subreddit;
+                tempObject.AuthorName = post.data.author;
+                tempObject.PermaLink = post.data.permalink;
+                tempObject.CreatedDateTime = timeInUtc;
+                redditList.Add(tempObject);
 
+            }
+            return redditList;
 
-        //}
+        }
 
         public async Task<List<TickerModel>> ConvertTickerToFloatAndRemoveUsdt()
         {

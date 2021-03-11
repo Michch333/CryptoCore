@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model CurrentPriceViewModel
+@model CryptoCore.Models.ViewModels.CoinTickerCombinedViewModel
 
 <div>
     <form asp-controller="Home" asp-action="SearchBySymbol">
@@ -18,15 +18,17 @@
             <tr>
                 <th scope="col">Symbol</th>
                 <th scope="col">Price</th>
-                <th scope="col">Action</th>
+                <th scope="col">Price change over 24HR</th>
+                <th scope="col">Action</th>>
             </tr>
         </thead>
         <tbody>
-            @foreach (var coin in Model.Coins)
+            @foreach (var coin in Model.CombinedInfo)
             {
                 <tr>
-                    <th scope="row">@coin.Symbol.Replace("USDT", "")</th>
+                    <th scope="row">@coin.CoinSymbol.Replace("USDT", "")</th>
                     <td>$@coin.Price</td>
+                    <td>%@coin.PriceChangePercent</td>
                 </tr>
             }
         </tbody>

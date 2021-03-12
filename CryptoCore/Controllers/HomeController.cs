@@ -55,8 +55,6 @@ namespace CryptoCore.Controllers
             foreach (var post in redditResponse.data.children)
             {
                 var tempObject = new RedditModel();
-                //var timeInUtc = DateTime.Parse(post.data.created_utc.ToString());
-                //DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(timeInUtc, cstZone);
                 tempObject.Title = post.data.title;
                 tempObject.SubReddit = post.data.subreddit;
                 tempObject.AuthorName = post.data.author;

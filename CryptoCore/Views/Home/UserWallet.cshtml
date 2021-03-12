@@ -38,23 +38,20 @@
                                 <div class="mdc-layout-grid__inner">
                                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
                                         <ul class="mdc-list mdc-list--dense demo-list">
-                                            @foreach(var post in Model.RedditPosts)
-                                            {
-                                                <li class="mdc-list-item">
-                                                    Title <a class="mdc-list-item__meta" href="@post.PermaLink">@post.Title</a>
-                                                </li>
-                                                <li class="mdc-list-item">
-                                                    SubReddit <span class="mdc-list-item__meta">@post.SubReddit</span>
-                                                </li>
-                                                <li class="mdc-list-item">
-                                                    Author <span class="mdc-list-item__meta">@post.AuthorName</span>
-                                                </li>
-                                                <li class="mdc-list-item">
-                                                    Title <a class="mdc-list-item__meta" href="@post.PermaLink">@post.Title</a>
-                                                </li>
-                                             }
-
+                                            <li class="mdc-list-item">
+                                             Update High <span class="mdc-list-item__meta"> <input placeholder="Please enter high"  type="text" class="mdc-text-field__input" required></span>
+                                            </li>
+                                            <li class="mdc-list-item">
+                                               Update Low <span class="mdc-list-item__meta"><input type="text" placeholder="Please enter low" class="mdc-text-field__input" required></span>
+                                            </li>
+                                            
                                         </ul>
+                                    </div>
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                                        <button class="mdc-button mdc-button--outlined">
+                                           Update
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </td>

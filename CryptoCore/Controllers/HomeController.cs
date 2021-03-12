@@ -55,13 +55,10 @@ namespace CryptoCore.Controllers
             foreach (var post in redditResponse.data.children)
             {
                 var tempObject = new RedditModel();
-                var timeInUtc = DateTime.Parse(post.data.created_utc.ToString());
-                DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(timeInUtc, cstZone);
                 tempObject.Title = post.data.title;
                 tempObject.SubReddit = post.data.subreddit;
                 tempObject.AuthorName = post.data.author;
                 tempObject.PermaLink = post.data.permalink;
-                tempObject.CreatedDateTime = timeInUtc;
                 redditList.Add(tempObject);
 
             }
@@ -242,7 +239,9 @@ namespace CryptoCore.Controllers
         {
             var model = new CoinTickerCombinedViewModel();
             model.AllInfo = await GetAllCoinInfo();
+            AddCoinPreferenceToDatabase("DOGE",7,5);
             return View(model);
+
         }
 
         public async Task<IActionResult> UserWallet()
@@ -252,11 +251,11 @@ namespace CryptoCore.Controllers
             var listOfCoins = _db.AllWalletInfo.Where(e => e.UserID == 1).ToList(); // TODO - Hard Coding User id
             foreach (var followedCoin in listOfCoins)
             {
-                //var response = await SearchReddit(followedCoin.Symbol);
-                //foreach (var item in response)
-                //{
-                //    model.RedditPosts.Add(item);
-                //}
+                var response = await SearchReddit(followedCoin.Symbol);
+                foreach (var item in response)
+                {
+                    model.RedditPosts.Add(item);
+                }
                 var coinInfo = await SearchBySymbolExact(followedCoin.Symbol);
                 model.WatchedCoinInfo.Add(coinInfo);
             }

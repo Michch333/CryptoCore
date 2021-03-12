@@ -194,7 +194,7 @@ namespace CryptoCore.Controllers
             }
             _db.SaveChanges();
         }
-        public void AddCoinPreferenceToDatabase(string symbol, int high, int low)
+        public void AddCoinPreferenceToDatabase(string symbol, float high, float low)
         {
             var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID == 1 && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coded UserID
             if (matchedRecord != null)
@@ -245,20 +245,27 @@ namespace CryptoCore.Controllers
 
         public async Task<IActionResult> UserWallet()
         {
+            UserWalletViewModel model = await BuildWalletViewModel();
+            return View(model);
+        }
+
+        private async Task<UserWalletViewModel> BuildWalletViewModel()
+        {
             var model = new UserWalletViewModel();
             model.AllInfo = await GetAllCoinInfo();
             var listOfCoins = _db.AllWalletInfo.Where(e => e.UserID == 1).ToList(); // TODO - Hard Coding User id
             foreach (var followedCoin in listOfCoins)
             {
-                var response = await SearchReddit(followedCoin.Symbol);
-                foreach (var item in response)
-                {
-                    model.RedditPosts.Add(item);
-                }
+                //var response = await SearchReddit(followedCoin.Symbol);
+                //foreach (var item in response)
+                //{
+                //    model.RedditPosts.Add(item);
+                //}
                 var coinInfo = await SearchBySymbolExact(followedCoin.Symbol);
                 model.WatchedCoinInfo.Add(coinInfo);
             }
-            return View(model);
+
+            return model;
         }
 
         public async Task<IActionResult> DisplaySearchInfo(string symbol = "DOGE")
@@ -316,10 +323,12 @@ namespace CryptoCore.Controllers
             return searchedCoin;
         }
 
-        public IActionResult AddCoin(string symbol) 
+        public async Task<IActionResult> AddCoin(string symbol, float high, float low) 
         {
+            AddCoinPreferenceToDatabase(symbol,high,low);
+            var model = await BuildWalletViewModel();
 
-            return View();
+            return View("UserWallet", model);
         }
         public IActionResult Privacy()
         {

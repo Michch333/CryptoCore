@@ -138,7 +138,6 @@ namespace CryptoCore.Models.ApiModels
             public bool stickied { get; set; }
             public string url { get; set; }
             public int subreddit_subscribers { get; set; }
-            //public int created_utc { get; set; }
             public int num_crossposts { get; set; }
             public Media media { get; set; }
             public bool is_video { get; set; }

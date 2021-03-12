@@ -58,7 +58,7 @@ namespace CryptoCore.Controllers
                 tempObject.Title = post.data.title;
                 tempObject.SubReddit = post.data.subreddit;
                 tempObject.AuthorName = post.data.author;
-                tempObject.PermaLink = post.data.permalink;
+                tempObject.PermaLink = "https://www.reddit.com" + post.data.permalink;
                 redditList.Add(tempObject);
 
             }
@@ -239,7 +239,6 @@ namespace CryptoCore.Controllers
         {
             var model = new CoinTickerCombinedViewModel();
             model.AllInfo = await GetAllCoinInfo();
-            AddCoinPreferenceToDatabase("DOGE",7,5);
             return View(model);
 
         }
@@ -268,6 +267,12 @@ namespace CryptoCore.Controllers
             model.SearchInfo = await SearchBySymbol(symbol);
             model.AllInfo = await GetAllCoinInfo();
 
+            return View(model);
+        }
+        public async Task<IActionResult> DisplayAllCoins()
+        {
+            var model = new CoinTickerCombinedViewModel();
+            model.AllInfo = await GetAllCoinInfo();
             return View(model);
         }
         public async Task<List<CoinTickerCombinedModel>> SearchBySymbol(string symbol = "DOGE")

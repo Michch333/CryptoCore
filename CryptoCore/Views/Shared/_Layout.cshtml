@@ -25,12 +25,12 @@
 
 
                     @*<svg height="40" viewBox="0 0 40 40" width="40" xmlns="http://www.w3.org/2000/svg">
-                        <g fill-rule="nonzero" transform="translate(22 22)">
-                            <path d="m0 3.64v14.26c9.44-.94 16.96-8.46 17.9-17.9h-14.26c-.62 1.7-1.94 3.02-3.64 3.64z" fill="var(--mdc-theme-primary-800)" />
-                            <path d="m-22-2c0 10.38 7.9 18.9 18 19.9v-14.26c-2.32-.84-4-3.04-4-5.64s1.68-4.8 4-5.64v-14.26c-10.1 1-18 9.52-18 19.9z" fill="var(--mdc-theme-primary-200)" />
-                            <path d="m3.64-4h14.26c-.94-9.44-8.46-16.96-17.9-17.9v14.26c1.7.62 3.02 1.94 3.64 3.64z" fill="var(--mdc-theme-primary-600)" />
-                        </g>
-                    </svg>*@
+                            <g fill-rule="nonzero" transform="translate(22 22)">
+                                <path d="m0 3.64v14.26c9.44-.94 16.96-8.46 17.9-17.9h-14.26c-.62 1.7-1.94 3.02-3.64 3.64z" fill="var(--mdc-theme-primary-800)" />
+                                <path d="m-22-2c0 10.38 7.9 18.9 18 19.9v-14.26c-2.32-.84-4-3.04-4-5.64s1.68-4.8 4-5.64v-14.26c-10.1 1-18 9.52-18 19.9z" fill="var(--mdc-theme-primary-200)" />
+                                <path d="m3.64-4h14.26c-.94-9.44-8.46-16.96-17.9-17.9v14.26c1.7.62 3.02 1.94 3.64 3.64z" fill="var(--mdc-theme-primary-600)" />
+                            </g>
+                        </svg>*@
 
                 </a>
                 <ul class="crypto-navigation__list">
@@ -113,55 +113,55 @@
                             @foreach (var coin in Model.AllInfo)
                             {
 
-                            <div class="crypto-marquee__item">
-                                <h3 class="crypto-marquee__item-logo">
-                                    <!-- Image or SVG here -->
+                                <div class="crypto-marquee__item">
+                                    <h3 class="crypto-marquee__item-logo">
+                                        <!-- Image or SVG here -->
 
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" class="crypto-marquee__item-logo-img">
-                                        <g>
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" class="crypto-marquee__item-logo-img">
                                             <g>
-                                                <mask fill="white">
-                                                    <use xlink:href="#path-1"></use>
-                                                </mask>
-                                                <use fill-rule="nonzero" xlink:href="#path-2"></use>
+                                                <g>
+                                                    <mask fill="white">
+                                                        <use xlink:href="#path-1"></use>
+                                                    </mask>
+                                                    <use fill-rule="nonzero" xlink:href="#path-2"></use>
+                                                </g>
                                             </g>
                                         </g>
-                                    </g>
 
-                                    <span>@coin.CoinSymbol.Replace("USDT", "")</span>
-                                </h3>
+                                        <span>@coin.CoinSymbol.Replace("USDT", "")</span>
+                                    </h3>
 
-                                @if (coin.PriceChangePercent > 0)
-                                {
-                                    <div class="crypto-marquee__item-percentage mdc-tab__crypto-stat-caption--trend-up">
-                                        <i class="material-icons" style="color: green">trending_up</i>
-                                        @coin.PriceChangePercent%
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="crypto-marquee__item-percentage mdc-tab__crypto-stat-caption--trend-down">
-                                        <i class="material-icons">trending_down</i>
-                                        @coin.PriceChangePercent%
-                                    </div>
+                                    @if (coin.PriceChangePercent > 0)
+                                    {
+                                        <div class="crypto-marquee__item-percentage mdc-tab__crypto-stat-caption--trend-up">
+                                            <i class="material-icons" style="color: green">trending_up</i>
+                                            @coin.PriceChangePercent%
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="crypto-marquee__item-percentage mdc-tab__crypto-stat-caption--trend-down">
+                                            <i class="material-icons">trending_down</i>
+                                            @coin.PriceChangePercent%
+                                        </div>
 
-                                }
-                                 @if (coin.PriceChangePercent > 0)
-                                {
-                                    <div class="crypto-marquee__item-value mdc-theme--primary">
-                                        <small>$</small> @coin.Price
-                                    </div>
-                                    <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-up"> @coin.PriceChange</div>
-                                }
-                                else
-                                {
-                                    <div class="crypto-marquee__item-value mdc-theme--primary">
-                                    <small>$</small> @coin.Price
-                                    </div>
-                                    <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-down"> @coin.PriceChange</div>
-                                
-                                }
-                            </div>
+                                    }
+                                    @if (coin.PriceChangePercent > 0)
+                                    {
+                                        <div class="crypto-marquee__item-value mdc-theme--primary">
+                                            <small>$</small> @coin.Price
+                                        </div>
+                                        <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-up"> @coin.PriceChange</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="crypto-marquee__item-value mdc-theme--primary">
+                                            <small>$</small> @coin.Price
+                                        </div>
+                                        <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-down"> @coin.PriceChange</div>
+
+                                    }
+                                </div>
 
                             }
                         </div>
@@ -170,12 +170,12 @@
                 </div>
                 @RenderBody()
             </div>
-         
+
         </main>
 
 
-  
-       
+
+
         <div class="crypto-menu-switches">
             <div class="crypto-menu-switches--handle">
                 <i class="material-icons">settings</i>

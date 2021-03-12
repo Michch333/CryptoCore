@@ -334,6 +334,13 @@ namespace CryptoCore.Controllers
 
             return View("UserWallet", model);
         }
+        public async Task<IActionResult> RemoveCoin(string symbol)
+        {
+            RemoveCoinPreference(symbol);
+            var model = await BuildWalletViewModel();
+
+            return View("UserWallet", model);
+        }
         public IActionResult Privacy()
         {
             return View();

@@ -20,15 +20,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var coin in Model.WatchedCoinInfo)
+                @foreach (var coin in Model.CombinedInfo)
                 {
                 <tr class="crypto-transactions-list__item">
                     <td class="mdl-data-table__cell--icon"><i class="fab fa-bitcoin"></i></td>
                     <td class="mdl-data-table__cell--non-numeric">@coin.CoinSymbol.Replace("USDT", "")</td>
                     <td class="mdl-data-table__cell--non-numeric">$@coin.Price</td>
                     <td class="mdl-data-table__cell--non-numeric">%@coin.PriceChangePercent</td>
-                    <td class="mdl-data-table__cell--non-numeric">$69</td>
-                    <td class="mdl-data-table__cell--non-numeric">$4.20</td>
+                    <td class="mdl-data-table__cell--non-numeric">@coin.UserHigh</td>
+                    <td class="mdl-data-table__cell--non-numeric">@coin.UserLow</td>
                     <td class="mdl-data-table__cell--non-numeric">@coin.Count</td>
                     <td><a href="#" class="crypto-transactions-list__item-toggle"><i class="material-icons">chevron_right</i></a></td>
                 </tr>

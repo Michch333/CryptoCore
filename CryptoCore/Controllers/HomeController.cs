@@ -312,7 +312,11 @@ namespace CryptoCore.Controllers
             return searchedCoin;
         }
 
+        public IActionResult AddCoin(string symbol) 
+        {
 
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

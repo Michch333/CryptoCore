@@ -59,7 +59,6 @@ namespace CryptoCore.Controllers
                 tempObject.SubReddit = post.data.subreddit;
                 tempObject.AuthorName = post.data.author;
                 tempObject.PermaLink = post.data.permalink;
-                //tempObject.CreatedDateTime = timeInUtc;
                 redditList.Add(tempObject);
 
             }

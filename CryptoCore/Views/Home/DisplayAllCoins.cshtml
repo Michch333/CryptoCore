@@ -3,9 +3,8 @@
 *@
 @{
 }
-@model CryptoCore.Models.ViewModels.UserWalletViewModel
-
-    <div class="crypto-widget__content crypto-overflow-x-auto">
+@model CryptoCore.Models.ViewModels.CoinTickerCombinedViewModel
+<div class="crypto-widget__content crypto-overflow-x-auto">
         <table class="mdl-data-table mdc-typography--overline">
             <thead class="crypto-transactions-list__labels">
                 <tr>
@@ -13,22 +12,18 @@
                     <th class="mdl-data-table__cell--non-numeric">Symbol</th>
                     <th class="mdl-data-table__cell--non-numeric">Price</th>
                     <th class="mdl-data-table__cell--non-numeric">Percent Change</th>
-                    <th class="mdl-data-table__cell--non-numeric">High Threshold</th>
-                    <th class="mdl-data-table__cell--non-numeric">Low Threshold</th>
                     <th class="mdl-data-table__cell--non-numeric">Count</th>
                     <th class="mdl-data-table__cell--non-numeric"></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var coin in Model.WatchedCoinInfo)
+                @foreach (var coin in Model.AllInfo)
                 {
                 <tr class="crypto-transactions-list__item">
                     <td class="mdl-data-table__cell--icon"><i class="fab fa-bitcoin"></i></td>
                     <td class="mdl-data-table__cell--non-numeric">@coin.CoinSymbol.Replace("USDT", "")</td>
                     <td class="mdl-data-table__cell--non-numeric">$@coin.Price</td>
                     <td class="mdl-data-table__cell--non-numeric">%@coin.PriceChangePercent</td>
-                    <td class="mdl-data-table__cell--non-numeric">$69</td>
-                    <td class="mdl-data-table__cell--non-numeric">$4.20</td>
                     <td class="mdl-data-table__cell--non-numeric">@coin.Count</td>
                     <td><a href="#" class="crypto-transactions-list__item-toggle"><i class="material-icons">chevron_right</i></a></td>
                 </tr>
@@ -37,24 +32,6 @@
                             <div class="mdc-layout-grid">
                                 <div class="mdc-layout-grid__inner">
                                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-                                        <ul class="mdc-list mdc-list--dense demo-list">
-                                            @foreach(var post in Model.RedditPosts)
-                                            {
-                                                <li class="mdc-list-item">
-                                                    Title <a class="mdc-list-item__meta" href="@post.PermaLink">@post.Title</a>
-                                                </li>
-                                                <li class="mdc-list-item">
-                                                    SubReddit <span class="mdc-list-item__meta">@post.SubReddit</span>
-                                                </li>
-                                                <li class="mdc-list-item">
-                                                    Author <span class="mdc-list-item__meta">@post.AuthorName</span>
-                                                </li>
-                                                <li class="mdc-list-item">
-                                                    Title <a class="mdc-list-item__meta" href="@post.PermaLink">@post.Title</a>
-                                                </li>
-                                             }
-
-                                        </ul>
                                 </div>
                             </div>
                         </td>

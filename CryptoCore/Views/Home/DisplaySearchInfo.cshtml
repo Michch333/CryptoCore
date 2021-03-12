@@ -3,16 +3,19 @@
 
 <div>
     <form asp-controller="Home" asp-action="DisplaySearchInfo">
-       
-        <div class="mdc-text-field mdc-text-field--fullwidth crypto-text-field--fullwidth mdc-text-field--dense crypto-margin-bottom-big">
-            <input placeholder="Symbol"type="text" name="symbol" class="mdc-text-field__input">
-           
+
+        <div class="mdc-layout-grid__cell--span-6">
+            
+            <input placeholder="Coin Symbol" type="text" name="symbol" class="mdc-text-field__input">
+
             <div class="mdc-line-ripple"></div>
 
             <button class="mdc-button mdc-button--outlined">
                 Search
             </button>
         </div>
+
+       
     </form>
 
     <div class="crypto-widget__content crypto-overflow-x-auto">
@@ -23,8 +26,7 @@
                     <th class="mdl-data-table__cell--non-numeric">Symbol</th>
                     <th class="mdl-data-table__cell--non-numeric">Price</th>
                     <th class="mdl-data-table__cell--non-numeric">Price change over 24HR</th>
-                    <th>Action</th>
-                    <th class="mdl-data-table__cell--non-numeric"></th>
+                    <th>Add Coin</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,28 +46,18 @@
                                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
                                         <ul class="mdc-list mdc-list--dense demo-list">
                                             <li class="mdc-list-item">
-                                                Version no <span class="mdc-list-item__meta">1</span>
+                                               High <span class="mdc-list-item__meta"> <input placeholder="Please enter high"  type="text" class="mdc-text-field__input" required></span>
                                             </li>
                                             <li class="mdc-list-item">
-                                                Flag <span class="mdc-list-item__meta">0001</span>
+                                               Low <span class="mdc-list-item__meta"><input type="text" placeholder="Please enter low" class="mdc-text-field__input" required></span>
                                             </li>
-                                            <li class="mdc-list-item">
-                                                Lock time <span class="mdc-list-item__meta">135180102155</span>
-                                            </li>
+                                            
                                         </ul>
                                     </div>
                                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-                                        <ul class="mdc-list mdc-list--dense demo-list">
-                                            <li class="mdc-list-item">
-                                                Witnesses <span class="mdc-list-item__meta">2</span>
-                                            </li>
-                                            <li class="mdc-list-item">
-                                                In-counter <span class="mdc-list-item__meta">177165211146174175</span>
-                                            </li>
-                                            <li class="mdc-list-item">
-                                                Out-counter <span class="mdc-list-item__meta">111232135106240239</span>
-                                            </li>
-                                        </ul>
+                                        <button class="mdc-button mdc-button--outlined">
+                                           Add
+                                        </button>
                                     </div>
                                 </div>
                             </div>

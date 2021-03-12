@@ -78,11 +78,11 @@
                     </li>
 
                     <li class="crypto-navigation__list-item mdc-ripple-surface ">
-                        <a asp-controller="Home" asp-action="SearchBySymbol">
+                        <a asp-controller="Home" asp-action="GetAllCoinInfo">
                             <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">category</i>
 
                             <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
-                                Search a coin
+                                Display All Coins
                             </span>
                         </a>
                     </li>
@@ -133,7 +133,7 @@
 
                                 @if (coin.PriceChangePercent > 0)
                                 {
-                                    <div class="crypto-marquee__item-percentage mdc-tab__crypto-stat-caption--trend-down">
+                                    <div class="crypto-marquee__item-percentage mdc-tab__crypto-stat-caption--trend-up">
                                         <i class="material-icons" style="color: green">trending_up</i>
                                         @coin.PriceChangePercent%
                                     </div>
@@ -146,10 +146,21 @@
                                     </div>
 
                                 }
-                                <div class="crypto-marquee__item-value mdc-theme--primary">
+                                 @if (coin.PriceChangePercent > 0)
+                                {
+                                    <div class="crypto-marquee__item-value mdc-theme--primary">
+                                        <small>$</small> @coin.Price
+                                    </div>
+                                    <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-up"> @coin.PriceChange</div>
+                                }
+                                else
+                                {
+                                    <div class="crypto-marquee__item-value mdc-theme--primary">
                                     <small>$</small> @coin.Price
-                                </div>
-                                <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-down"> @coin.PriceChange</div>
+                                    </div>
+                                    <div class="crypto-marquee__item-difference mdc-tab__crypto-stat-caption--trend-down"> @coin.PriceChange</div>
+                                
+                                }
                             </div>
 
                             }

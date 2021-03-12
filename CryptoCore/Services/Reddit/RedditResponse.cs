@@ -84,7 +84,7 @@ namespace CryptoCore.Models.ApiModels
             public object content_categories { get; set; }
             public bool is_self { get; set; }
             public object mod_note { get; set; }
-            public int created { get; set; }
+            //public int created { get; set; }
             public string link_flair_type { get; set; }
             public int wls { get; set; }
             public object removed_by_category { get; set; }
@@ -138,7 +138,7 @@ namespace CryptoCore.Models.ApiModels
             public bool stickied { get; set; }
             public string url { get; set; }
             public int subreddit_subscribers { get; set; }
-            public int created_utc { get; set; }
+            //public int created_utc { get; set; }
             public int num_crossposts { get; set; }
             public Media media { get; set; }
             public bool is_video { get; set; }

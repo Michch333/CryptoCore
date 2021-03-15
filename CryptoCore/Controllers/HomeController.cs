@@ -250,19 +250,23 @@ namespace CryptoCore.Controllers
         }
 
         private async Task<UserWalletViewModel> BuildWalletViewModel()
-        {
+        {   
+            
             var model = new UserWalletViewModel();
             model.AllInfo = await GetAllCoinInfo();
             var listOfCoins = _db.AllWalletInfo.Where(e => e.UserID == 1).ToList(); // TODO - Hard Coding User id
             foreach (var followedCoin in listOfCoins)
             {
-                //var response = await SearchReddit(followedCoin.Symbol);
-                //foreach (var item in response)
-                //{
-                //    model.RedditPosts.Add(item);
-                //}
+                
                 var coinInfo = await SearchBySymbolExact(followedCoin.Symbol);
-                model.WatchedCoinInfo.Add(coinInfo);
+                var tempObject = new CombinedAllAndWatched();
+                tempObject.CoinSymbol = coinInfo.CoinSymbol;
+                tempObject.UserHigh = followedCoin.UserHigh;
+                tempObject.UserLow = followedCoin.UserLow;
+                tempObject.Price = coinInfo.Price;
+                tempObject.PriceChangePercent = coinInfo.PriceChangePercent;
+                tempObject.Count = coinInfo.Count;
+                model.CombinedInfo.Add(tempObject);
             }
 
             return model;
@@ -326,6 +330,13 @@ namespace CryptoCore.Controllers
         public async Task<IActionResult> AddCoin(string symbol, float high, float low) 
         {
             AddCoinPreferenceToDatabase(symbol,high,low);
+            var model = await BuildWalletViewModel();
+
+            return View("UserWallet", model);
+        }
+        public async Task<IActionResult> RemoveCoin(string symbol)
+        {
+            RemoveCoinPreference(symbol);
             var model = await BuildWalletViewModel();
 
             return View("UserWallet", model);

@@ -15,10 +15,12 @@ namespace CryptoCore.Models.ViewModels
             AllInfo = new List<CoinTickerCombinedModel>();
             WatchedCoinInfo = new List<CoinTickerCombinedModel>();
             RedditPosts = new List<RedditModel>();
+            CombinedInfo = new List<CombinedAllAndWatched>();
         }
         public WalletDAL Wallet { get; set; }
         public List<CoinTickerCombinedModel> AllInfo { get; set; }
         public List<CoinTickerCombinedModel> WatchedCoinInfo { get; set; }
         public List<RedditModel> RedditPosts { get; set; }
+        public List<CombinedAllAndWatched> CombinedInfo { get; set; }
     }
 }

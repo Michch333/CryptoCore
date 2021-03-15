@@ -22,8 +22,8 @@
             <tbody>
                 @foreach (var coin in Model.CombinedInfo)
                 {
-                <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@coin.CoinSymbol" asp-route-high="high" asp-route-low="low">
-                <form asp-controller="Home" asp-action="RemoveCoin" asp-route-symbol="@coin.CoinSymbol">
+               <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@coin.CoinSymbol" asp-route-high="high" asp-route-low="low">
+             
                 <tr class="crypto-transactions-list__item">
                     <td class="mdl-data-table__cell--icon"><i class="fab fa-bitcoin"></i></td>
                     <td class="mdl-data-table__cell--non-numeric">@coin.CoinSymbol.Replace("USDT", "")</td>
@@ -41,7 +41,7 @@
                                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
                                         <ul class="mdc-list mdc-list--dense demo-list">
                                             <li class="mdc-list-item">
-                                             Update High <span class="mdc-list-item__meta"> <input placeholder="Please enter high" name="high" type="text" class="mdc-text-field__input" required></span>
+                                             Update High <span class="mdc-list-item__meta"> <input placeholder="Please enter high" name="high"  type="text" class="mdc-text-field__input" required></span>
                                             </li>
                                             <li class="mdc-list-item">
                                                Update Low <span class="mdc-list-item__meta"><input type="text" placeholder="Please enter low" name="low" class="mdc-text-field__input" required></span>
@@ -50,13 +50,12 @@
                                         </ul>
                                     </div>
                                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-                                        <button class="mdc-button mdc-button--outlined">
-                                           Update
+                                        <button class="mdc-button mdc-button--outlined" >
+                                            Update
                                         </button>
                                         
-                                        <button class="mdc-button mdc-button--outlined">
-                                            
-                                           Remove
+                                        <button type="button" onclick="location.href='@Url.Action("RemoveCoin", "Home", new {symbol = @coin.CoinSymbol})'" class="mdc-button mdc-button--outlined" >
+                                        Delete
                                         </button>
                                     
                                     </div>
@@ -64,12 +63,10 @@
                             </div>
                         </td>
                     </tr>
-                </form>
-                <button class="mdc-button mdc-button--outlined">
-                Update
-                </button>
-                </form>
+                    </form>
+             
                 }
             </tbody>
         </table>
-    </div
+    </div>
+    

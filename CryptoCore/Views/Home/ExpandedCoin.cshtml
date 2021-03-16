@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CryptoCore.Models.ViewModels.ExpandedCoinViewModel
+ <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@Model.CoinSymbol" asp-route-high="high" asp-route-low="low">
+             
+
+ <tr class="crypto-transactions-list__item--details">
+                     
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1">
+                                        <ul class="mdc-list mdc-list--dense demo-list">
+                                             <h1>@Model.CoinSymbol</h1>
+                                            <li class="mdc-list-item">
+                                              
+                                             Update High <input placeholder="Please enter high" name="high" width="48"  type="text" class="mdc-text-field__input" required>
+                                            </li>
+                                            <li class="mdc-list-item">
+                                               Update Low <input type="text" placeholder="Please enter low" name="low" width="48" class="mdc-text-field__input" required>
+                                            </li>
+                                            <li>
+                                                <button class="mdc-button mdc-button--outlined" >
+                                                Update
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button type="button" onclick="location.href='@Url.Action("RemoveCoin", "Home", new {symbol = Model.CoinSymbol})'" class="mdc-button mdc-button--outlined" >
+                                                Delete
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </tr>
+                            </form>

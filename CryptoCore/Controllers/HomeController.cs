@@ -15,17 +15,23 @@ using System;
 using CryptoCore.Models.ViewModels;
 using System.Linq;
 
+using Microsoft.AspNetCore.Identity;
+
+
+
 namespace CryptoCore.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly BinanceClient _binanceClient;
         private readonly RedditClient _redditClient;
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger, BinanceClient binanceClient, RedditClient redditClient, ApplicationDbContext dbContext)
+        public HomeController(ILogger<HomeController> logger, BinanceClient binanceClient, RedditClient redditClient, ApplicationDbContext dbContext,UserManager <IdentityUser> userManager)
         {
+            _userManager = userManager;
             _binanceClient = binanceClient;
             _redditClient = redditClient;
             _logger = logger;
@@ -351,5 +357,9 @@ namespace CryptoCore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Login() { return View(); }
+
+       
     }
 }

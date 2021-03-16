@@ -32,43 +32,35 @@
             <tbody>
                 @foreach (var coin in Model.SearchInfo)
                 {
-                    <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@coin.CoinSymbol" asp-route-high="high" asp-route-low="low">
-                        <tr class="crypto-transactions-list__item">
-                            <td class="mdl-data-table__cell--icon"><i class="fab fa-bitcoin"></i></td>
-                            <td class="mdl-data-table__cell--non-numeric">@coin.CoinSymbol.Replace("USDT", "")</td>
-                            <td class="mdl-data-table__cell--non-numeric">$@coin.Price</td>
-                            <td class="mdl-data-table__cell--non-numeric">%@coin.PriceChangePercent</td>
-                            <td><a href="#" class="crypto-transactions-list__item-toggle"><i class="material-icons">chevron_right</i></a></td>
-                        </tr>
-                        <tr class="crypto-transactions-list__item--details">
-                            <td colspan="7">
+ <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="coin.CoinSymbol" asp-route-high="high" asp-route-low="low">
+             
 
-                                <div class="mdc-layout-grid">
-                                    <div class="mdc-layout-grid__inner">
-
-                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-                                            <ul class="mdc-list mdc-list--dense demo-list">
-                                                <li class="mdc-list-item">
-                                                    High <span class="mdc-list-item__meta"> <input placeholder="Please enter high" name="high" type="text" class="mdc-text-field__input" required></span>
-                                                </li>
-                                                <li class="mdc-list-item">
-                                                    Low <span class="mdc-list-item__meta"><input type="text" placeholder="Please enter low" name="low" class="mdc-text-field__input" required></span>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-                                            <button class="mdc-button mdc-button--outlined">
-                                                Add
-                                            </button>
-                                        </div>
-
+ <tr class="crypto-transactions-list__item--details">
+                     
+                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1">
+                                        <ul class="mdc-list mdc-list--dense demo-list">
+                                             <h1>coin.CoinSymbol</h1>
+                                            <li class="mdc-list-item">
+                                              
+                                             Update High <input placeholder="Please enter high" name="high" width="48"  type="text" class="mdc-text-field__input" required>
+                                            </li>
+                                            <li class="mdc-list-item">
+                                               Update Low <input type="text" placeholder="Please enter low" name="low" width="48" class="mdc-text-field__input" required>
+                                            </li>
+                                            <li>
+                                                <button class="mdc-button mdc-button--outlined" >
+                                                Update
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button type="button" onclick="location.href='@Url.Action("RemoveCoin", "Home", new {symbol =coin.CoinSymbol})'" class="mdc-button mdc-button--outlined" >
+                                                Delete
+                                                </button>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </div>
-
-                            </td>
-                        </tr>
-                    </form>
+                                </tr>
+                            </form>
 
                 }
             </tbody>

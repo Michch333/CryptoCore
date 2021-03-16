@@ -16,11 +16,11 @@ using CryptoCore.Models.ViewModels;
 using System.Linq;
 
 using Microsoft.AspNetCore.Identity;
-
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace CryptoCore.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -29,7 +29,7 @@ namespace CryptoCore.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger, BinanceClient binanceClient, RedditClient redditClient, ApplicationDbContext dbContext,UserManager <IdentityUser> userManager)
+        public HomeController(ILogger<HomeController> logger, BinanceClient binanceClient, RedditClient redditClient, ApplicationDbContext dbContext, UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
             _binanceClient = binanceClient;
@@ -202,7 +202,8 @@ namespace CryptoCore.Controllers
         }
         public void AddCoinPreferenceToDatabase(string symbol, float high, float low)
         {
-            var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID == 1 && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coded UserID
+            //var userId = await _userManager.GetUserId(User);
+            var matchedRecord =  _db.AllWalletInfo.Where(e => e.UserID == 1 && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coded UserID
             if (matchedRecord != null)
             {
                 matchedRecord.UserHigh = high;
@@ -256,14 +257,14 @@ namespace CryptoCore.Controllers
         }
 
         private async Task<UserWalletViewModel> BuildWalletViewModel()
-        {   
-            
+        {
+
             var model = new UserWalletViewModel();
             model.AllInfo = await GetAllCoinInfo();
             var listOfCoins = _db.AllWalletInfo.Where(e => e.UserID == 1).ToList(); // TODO - Hard Coding User id
             foreach (var followedCoin in listOfCoins)
             {
-                
+
                 var coinInfo = await SearchBySymbolExact(followedCoin.Symbol);
                 var tempObject = new CombinedAllAndWatched();
                 tempObject.CoinSymbol = coinInfo.CoinSymbol;
@@ -313,6 +314,7 @@ namespace CryptoCore.Controllers
             }
             return searchedCoin;
         }
+       
         public async Task<CoinTickerCombinedModel> SearchBySymbolExact(string symbol = "DOGE")
         {
             var upperSymbol = symbol.ToUpper();
@@ -360,6 +362,12 @@ namespace CryptoCore.Controllers
 
         public IActionResult Login() { return View(); }
 
+        public IActionResult Logout() 
+        { 
+            
+            return View(); 
+        
+        }
        
     }
 }

@@ -4,10 +4,8 @@
 @{
 }
 @model CryptoCore.Models.ViewModels.ExpandedCoinViewModel
- <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@Model.CoinSymbol" asp-route-high="high" asp-route-low="low">
-             
-
- <tr class="crypto-transactions-list__item--details">
+                            <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@Model.CoinSymbol" asp-route-high="high" asp-route-low="low">
+                                <tr class="crypto-transactions-list__item--details">
                      
                                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1">
                                         <ul class="mdc-list mdc-list--dense demo-list">
@@ -31,25 +29,22 @@
                                             </li>
                                         </ul>
                                         
-                                            @foreach(var post in @Model.RedditPosts)
-                                            {
+                                        @foreach(var post in @Model.RedditPosts)
+                                        {
                                                 <ul>
-                                            <li class="mdc-list-item">
-                                            @post.Title      
-                                            </li>
-                                             <li class="mdc-list-item">
-                                            @post.SubReddit      
-                                            </li>
-                                             <li class="mdc-list-item">
-                                            <a>
-                                               @post.PermaLink  
-
-                                            </a>     
-                                            </li>
+                                                <li class="mdc-list-item">
+                                                    @post.Title      
+                                                </li>
+                                                <li class="mdc-list-item">
+                                                    @post.SubReddit      
+                                                </li>
+                                                <li class="mdc-list-item">
+                                                    <a>@post.PermaLink</a>
+                                                </li>
                                             </ul>
-                                            }
+                                        }
 
                                        
-                                    </div>
+                                  </div>
                                 </tr>
                             </form>

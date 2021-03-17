@@ -1,4 +1,5 @@
 ﻿using CryptoCore.Models.DALModels;
+using CryptoCore.Services.Binance;
 using CryptoCore.Services.Reddit;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace CryptoCore.Models.ViewModels
         {
             RedditPosts = new List<RedditModel>();
             CoinDAL = new List<CoinDAL>();
+            AllInfo = new List<CoinTickerCombinedModel>();
         }
 
         public string CoinSymbol { get; set; }
@@ -24,6 +26,7 @@ namespace CryptoCore.Models.ViewModels
         public int Count { get; set; }
         public List<RedditModel> RedditPosts { get; set; }
         public List<CoinDAL> CoinDAL { get; set; }
+        public List<CoinTickerCombinedModel> AllInfo { get; set; }
     }
 }
 

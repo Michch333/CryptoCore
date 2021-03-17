@@ -30,6 +30,26 @@
                                                 </button>
                                             </li>
                                         </ul>
+                                        
+                                            @foreach(var post in @Model.RedditPosts)
+                                            {
+                                                <ul>
+                                            <li class="mdc-list-item">
+                                            @post.Title      
+                                            </li>
+                                             <li class="mdc-list-item">
+                                            @post.SubReddit      
+                                            </li>
+                                             <li class="mdc-list-item">
+                                            <a>
+                                               @post.PermaLink  
+
+                                            </a>     
+                                            </li>
+                                            </ul>
+                                            }
+
+                                       
                                     </div>
                                 </tr>
                             </form>

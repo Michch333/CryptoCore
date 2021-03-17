@@ -347,10 +347,6 @@ namespace CryptoCore.Controllers
 
             return View("UserWallet", model);
         }
-        public async Task<IActionResult> ExpandedCoin(string symbol)
-        {
-
-        }
         public IActionResult Privacy()
         {
             return View();

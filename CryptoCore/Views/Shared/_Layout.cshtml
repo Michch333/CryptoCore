@@ -91,7 +91,7 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li class="crypto-navigation__list-item mdc-ripple-surface ">
-                            <a asp-area="Identity" asp-page="/Account/Logout">
+                            <a asp-controller="Home" asp-action="Logout">
                                 <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">power_settings_new</i>
 
                                 <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
@@ -119,9 +119,9 @@
 
         </div>
 
+      
 
-
-        @*@if (SignInManager.IsSignedIn(User))
+        @if (SignInManager.IsSignedIn(User))
         {
         <main class="crypto-main">
              <div class="crypto-main__content mdc-theme--text-primary-on-background">
@@ -131,19 +131,15 @@
          </div>
          </main>
 
-        }*@
-
-
-
-
-
+        }
+        else{
         <main class="crypto-main">
             <div class="crypto-main__content mdc-theme--text-primary-on-background">
-
-               
-                @RenderBody()
+                 @RenderBody()
             </div>
         </main>
+        }
+
         <div class="crypto-menu-switches">
             <div class="crypto-menu-switches--handle">
                 <i class="material-icons">settings</i>

@@ -20,18 +20,20 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CryptoCore.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly BinanceClient _binanceClient;
         private readonly RedditClient _redditClient;
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger, BinanceClient binanceClient, RedditClient redditClient, ApplicationDbContext dbContext, UserManager<IdentityUser> userManager)
+        public HomeController(ILogger<HomeController> logger, BinanceClient binanceClient, RedditClient redditClient, ApplicationDbContext dbContext, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
             _binanceClient = binanceClient;
             _redditClient = redditClient;
             _logger = logger;
@@ -203,7 +205,7 @@ namespace CryptoCore.Controllers
         public void AddCoinPreferenceToDatabase(string symbol, float high, float low)
         {
             //var userId = await _userManager.GetUserId(User);
-            var matchedRecord =  _db.AllWalletInfo.Where(e => e.UserID == 1 && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coded UserID
+            var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID == 1 && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coded UserID
             if (matchedRecord != null)
             {
                 matchedRecord.UserHigh = high;
@@ -296,7 +298,7 @@ namespace CryptoCore.Controllers
 
             return model;
         }
-
+        [AllowAnonymous]
         public async Task<IActionResult> DisplaySearchInfo(string symbol = "DOGE")
         {
             var model = new CoinTickerCombinedViewModel();
@@ -305,6 +307,7 @@ namespace CryptoCore.Controllers
 
             return View(model);
         }
+        [AllowAnonymous]
         public async Task<IActionResult> DisplayAllCoins()
         {
             var model = new CoinTickerCombinedViewModel();
@@ -332,7 +335,7 @@ namespace CryptoCore.Controllers
             }
             return searchedCoin;
         }
-       
+
         public async Task<CoinTickerCombinedModel> SearchBySymbolExact(string symbol = "DOGE")
         {
             var upperSymbol = symbol.ToUpper();
@@ -341,7 +344,7 @@ namespace CryptoCore.Controllers
             foreach (var coin in curatedList)
             {
 
-                if (coin.CoinSymbol.Contains(upperSymbol)) 
+                if (coin.CoinSymbol.Contains(upperSymbol))
                 {
                     searchedCoin.CoinSymbol = coin.CoinSymbol;
                     searchedCoin.Price = coin.Price;
@@ -353,14 +356,14 @@ namespace CryptoCore.Controllers
             return searchedCoin;
         }
 
-        public async Task<IActionResult> AddCoin(string symbol, float high, float low) 
+        public async Task<IActionResult> AddCoin(string symbol, float high, float low)
         {
-            AddCoinPreferenceToDatabase(symbol,high,low);
+            AddCoinPreferenceToDatabase(symbol, high, low);
             var model = await BuildWalletViewModel();
 
             return View("UserWallet", model);
         }
-        public async Task<IActionResult>RemoveCoin(string symbol)
+        public async Task<IActionResult> RemoveCoin(string symbol)
         {
             RemoveCoinPreference(symbol);
             var model = await BuildWalletViewModel();
@@ -380,12 +383,12 @@ namespace CryptoCore.Controllers
 
         public IActionResult Login() { return View(); }
 
-        public IActionResult Logout() 
-        { 
-            
-            return View(); 
-        
-        }
-       
+        [AllowAnonymous]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        } 
+
     }
 }

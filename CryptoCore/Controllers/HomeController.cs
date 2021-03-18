@@ -250,6 +250,24 @@ namespace CryptoCore.Controllers
 
         }
 
+        public async Task<IActionResult> TestChart(string symbol = "BTCUSDT")
+        
+        {
+            var viewModel = new ExpandedCoinViewModel();
+            viewModel.AllInfo = await GetAllCoinInfo();
+            viewModel.CoinSymbol = symbol;
+            viewModel.DatabaseInfo = _db.Coins.Where(e => e.Symbol == symbol).ToList();
+            viewModel.Lables = new List<string>();
+            viewModel.Data = new List<float>();
+            for (int i = 0; i < viewModel.DatabaseInfo.Count; i++)
+            {
+                viewModel.Lables.Add(viewModel.DatabaseInfo[i].EntryTime.ToString());
+                viewModel.Data.Add(viewModel.DatabaseInfo[i].Price);
+            }
+
+            return View(viewModel);
+        }
+
         public async Task<IActionResult> UserWallet()
         {
             UserWalletViewModel model = await BuildWalletViewModel();

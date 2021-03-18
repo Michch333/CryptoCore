@@ -6,7 +6,7 @@
             <!-- start of ticker -->
             @foreach (var coin in Model.AllInfo)
             {
-
+                 <button type="button" onclick="location.href='@Url.Action("ExpandedCoin", "Home", new {symbol = Model.CoinSymbol})'" class="mdc-button mdc-button--outlined" >
                 <div class="crypto-marquee__item">
                     <h3 class="crypto-marquee__item-logo">
                         <!-- Image or SVG here -->
@@ -56,7 +56,7 @@
 
                     }
                 </div>
-
+            </button>
             }
 
 

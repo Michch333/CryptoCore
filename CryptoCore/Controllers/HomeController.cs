@@ -248,25 +248,6 @@ namespace CryptoCore.Controllers
             return View(model);
 
         }
-
-        public async Task<IActionResult> TestChart(string symbol = "BTCUSDT")
-        
-        {
-            var viewModel = new ExpandedCoinViewModel();
-            viewModel.AllInfo = await GetAllCoinInfo();
-            viewModel.CoinSymbol = symbol;
-            viewModel.DatabaseInfo = _db.Coins.Where(e => e.Symbol == symbol).ToList();
-            viewModel.Lables = new List<string>();
-            viewModel.Data = new List<float>();
-            for (int i = 0; i < viewModel.DatabaseInfo.Count; i++)
-            {
-                viewModel.Lables.Add(viewModel.DatabaseInfo[i].EntryTime.ToString());
-                viewModel.Data.Add(viewModel.DatabaseInfo[i].Price);
-            }
-
-            return View(viewModel);
-        }
-
         public async Task<IActionResult> UserWallet()
         {
             UserWalletViewModel model = await BuildWalletViewModel();
@@ -364,6 +345,28 @@ namespace CryptoCore.Controllers
             var model = await BuildWalletViewModel();
 
             return View("UserWallet", model);
+        }
+
+        public async Task<IActionResult> ExpandedCoin(string symbol = "DOGE")
+        {
+            var model = new ExpandedCoinViewModel();
+            model.RedditPosts = await SearchReddit(symbol);
+            model.AllInfo = await GetAllCoinInfo();
+            model.DatabaseInfo =GetCoinInfoFromDatabase(symbol);
+            var tempObject = await SearchBySymbolExact(symbol);
+            tempObject.CoinSymbol = model.CoinSymbol;
+            tempObject.Price = model.Price;
+            tempObject.PriceChange = model.PriceChange;
+            tempObject.PriceChangePercent = model.PriceChangePercent;
+            tempObject.Count = model.Count;
+                if (model.DatabaseInfo != null)
+                {
+                    model.IsinWallet = true;
+                    WalletDAL Coin = _db.AllWalletInfo.Where(e => e.UserID == 1 && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coding User id
+                    model.UserHigh = Coin.UserHigh;
+                    model.UserLow = Coin.UserLow;
+                }
+            return View(model);
         }
         public IActionResult Privacy()
         {

@@ -158,7 +158,7 @@ namespace CryptoCore.Controllers
         public void AddCoinInfoToDatabase(CoinTickerCombinedModel coinInfo)
         {
             var tempCoin = new CoinDAL();
-            tempCoin.Symbol = coinInfo.CoinSymbol;
+            tempCoin.Symbol = coinInfo.CoinSymbol.Replace("USDT", "");
             tempCoin.Price = coinInfo.Price;
             tempCoin.Count = coinInfo.Count;
 

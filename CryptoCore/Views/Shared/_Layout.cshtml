@@ -91,7 +91,7 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li class="crypto-navigation__list-item mdc-ripple-surface ">
-                            <a asp-area="Identity" asp-page="/Account/Logout">
+                            <a asp-controller="Home" asp-action="Logout">
                                 <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">power_settings_new</i>
 
                                 <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
@@ -119,9 +119,9 @@
 
         </div>
 
+      
 
-
-        @*@if (SignInManager.IsSignedIn(User))
+        @if (SignInManager.IsSignedIn(User))
         {
         <main class="crypto-main">
              <div class="crypto-main__content mdc-theme--text-primary-on-background">
@@ -130,15 +130,16 @@
             @RenderBody()
          </div>
          </main>
-          
-        }*@
 
+        }
+        else{
+        <main class="crypto-main">
+            <div class="crypto-main__content mdc-theme--text-primary-on-background">
+                 @RenderBody()
+            </div>
+        </main>
+        }
 
-
-
-
-
-        @RenderBody()
         <div class="crypto-menu-switches">
             <div class="crypto-menu-switches--handle">
                 <i class="material-icons">settings</i>
@@ -149,7 +150,7 @@
                     <div class="mdc-switch__track"></div>
                     <div class="mdc-switch__thumb-underlay">
                         <div class="mdc-switch__thumb">
-                            <input type="checkbox" id="rtl-switch" class="mdc-switch__native-control" role="switch" aria-checked="false">
+                            <input type="checkbox" id="rtl-switch" class="mdc-switch__native-control" aria-checked="false">
                         </div>
                     </div>
                 </div>
@@ -161,7 +162,7 @@
                     <div class="mdc-switch__track"></div>
                     <div class="mdc-switch__thumb-underlay">
                         <div class="mdc-switch__thumb">
-                            <input type="checkbox" id="crypto-theme-switch" class="mdc-switch__native-control" role="switch" aria-checked="false">
+                            <input type="checkbox" id="crypto-theme-switch" class="mdc-switch__native-control" aria-checked="false">
                         </div>
                     </div>
 

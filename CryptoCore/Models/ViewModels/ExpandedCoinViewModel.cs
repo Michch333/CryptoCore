@@ -13,7 +13,7 @@ namespace CryptoCore.Models.ViewModels
         public ExpandedCoinViewModel()
         {
             RedditPosts = new List<RedditModel>();
-            CoinDAL = new List<CoinDAL>();
+            DatabaseInfo = new List<CoinDAL>();
             AllInfo = new List<CoinTickerCombinedModel>();
         }
 
@@ -25,8 +25,10 @@ namespace CryptoCore.Models.ViewModels
         public double UserLow { get; set; }
         public int Count { get; set; }
         public List<RedditModel> RedditPosts { get; set; }
-        public List<CoinDAL> CoinDAL { get; set; }
+        public List<CoinDAL> DatabaseInfo { get; set; }
         public List<CoinTickerCombinedModel> AllInfo { get; set; }
+        public List<string> Lables { get; set; }
+        public List<float> Data { get; set; }
     }
 }
 

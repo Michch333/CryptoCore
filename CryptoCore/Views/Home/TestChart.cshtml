@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model CryptoCore.Models.ViewModels.ExpandedCoinViewModel
+@{ 
+}
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                Line Chart
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="lineChart" width="500" height="500"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script type="text/javascript">
+    var ctx = document.getElementById('lineChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            @{
+                var tlabels = new string[5];
+                for (int i = 0; i < 5; i++)
+                {
+                    tlabels.SetValue(Model.Lables.ElementAt(i), i);
+                }
+             }
+            labels: ['@Model.Lables.ElementAt(0)', '@Model.Lables.ElementAt(1)', '@Model.Lables.ElementAt(2)'],
+            datasets: [{
+                label: '@Model.CoinSymbol',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [@Model.Data.ElementAt(0),@Model.Data.ElementAt(1),@Model.Data.ElementAt(2)],
+                fill: false
+            }]
+        },
+        options: {},
+    })
+</script>
+

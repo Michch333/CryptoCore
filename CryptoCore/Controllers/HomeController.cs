@@ -112,7 +112,6 @@ namespace CryptoCore.Controllers
                         tempObject.PriceChangePercent = ticker.PriceChangePercent;
                         tempObject.Count = ticker.Count;
                         combinedInfo.Add(tempObject);
-                        AddCoinInfoToDatabase(tempObject);
                     }
 
                 }

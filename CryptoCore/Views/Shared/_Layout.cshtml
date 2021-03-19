@@ -37,59 +37,61 @@
                 </a>
                 <ul class="crypto-navigation__list">
 
-                    <li class="crypto-navigation__list-item mdc-ripple-surface crypto-navigation__list-item--active">
-                        <a asp-controller="Home" asp-action="Index">
-                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">timeline</i>
 
-                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline" asp-controller="Home" asp-action="Index">
-                                Dashboard
-                            </span>
-                        </a>
-                    </li>
 
-                    <li class="crypto-navigation__list-item mdc-ripple-surface ">
-                        <a asp-controller="Home" asp-action="UserWallet">
-                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">account_balance_wallet</i>
 
-                            <span class="crypto-navigation__list-item__badge">2</span>
 
-                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
-                                Wallet
-                            </span>
-                        </a>
-                    </li>
 
-                    <li class="crypto-navigation__list-item mdc-ripple-surface ">
-                        <a asp-controller="Home" asp-action="DisplaySearchInfo">
-                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">search</i>
-
-                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
-                                Search Crypto
-                            </span>
-                        </a>
-                    </li>
-
-                    <li class="crypto-navigation__list-item mdc-ripple-surface ">
-                        <a href="profile.html">
-                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">person</i>
-
-                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
-                                Profile
-                            </span>
-                        </a>
-                    </li>
-
-                    <li class="crypto-navigation__list-item mdc-ripple-surface ">
-                        <a asp-controller="Home" asp-action="DisplayAllCoins">
-                            <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">category</i>
-
-                            <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
-                                Coins
-                            </span>
-                        </a>
-                    </li>
                     @if (SignInManager.IsSignedIn(User))
                     {
+                        <li class="crypto-navigation__list-item mdc-ripple-surface crypto-navigation__list-item--active">
+                            <a asp-controller="Home" asp-action="Index">
+                                <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">timeline</i>
+
+                                <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline" asp-controller="Home" asp-action="Index">
+                                    Dashboard
+                                </span>
+                            </a>
+                        </li>
+                        <li class="crypto-navigation__list-item mdc-ripple-surface ">
+                            <a asp-controller="Home" asp-action="UserWallet">
+                                <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">account_balance_wallet</i>
+
+                                <span class="crypto-navigation__list-item__badge">2</span>
+
+                                <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
+                                    Wallet
+                                </span>
+                            </a>
+                        </li>
+                        <li class="crypto-navigation__list-item mdc-ripple-surface ">
+                            <a asp-controller="Home" asp-action="DisplaySearchInfo">
+                                <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">search</i>
+
+                                <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
+                                    Search Crypto
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="crypto-navigation__list-item mdc-ripple-surface ">
+                            <a asp-controller="Home" asp-action="DisplayAllCoins">
+                                <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">category</i>
+
+                                <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
+                                    Coins
+                                </span>
+                            </a>
+                        </li>
+                        <li class="crypto-navigation__list-item mdc-ripple-surface ">
+                            <a href="profile.html">
+                                <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">person</i>
+
+                                <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
+                                    Profile
+                                </span>
+                            </a>
+                        </li>
                         <li class="crypto-navigation__list-item mdc-ripple-surface ">
                             <a asp-controller="Home" asp-action="Logout">
                                 <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">power_settings_new</i>
@@ -102,6 +104,25 @@
                     }
                     else
                     {
+                        <li class="crypto-navigation__list-item mdc-ripple-surface ">
+                            <a asp-controller="Home" asp-action="DisplaySearchInfo">
+                                <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">search</i>
+
+                                <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
+                                    Search Crypto
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="crypto-navigation__list-item mdc-ripple-surface ">
+                            <a asp-controller="Home" asp-action="DisplayAllCoins">
+                                <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">category</i>
+
+                                <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
+                                    Coins
+                                </span>
+                            </a>
+                        </li>
                         <li class="crypto-navigation__list-item mdc-ripple-surface ">
                             <a asp-area="Identity" asp-page="/Account/Login">
                                 <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">power_settings_new</i>

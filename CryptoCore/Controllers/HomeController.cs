@@ -215,7 +215,7 @@ namespace CryptoCore.Controllers
             else
             {
                 var newEntry = new WalletDAL();
-                newEntry.Symbol = symbol;
+                newEntry.Symbol = symbol.Replace("USDT","");
                 newEntry.UserHigh = high;
                 newEntry.UserLow = low;
                 newEntry.TimeAddedToWallet = DateTime.Now;
@@ -359,21 +359,41 @@ namespace CryptoCore.Controllers
             var model = new ExpandedCoinViewModel();
             model.RedditPosts = await SearchReddit(symbol);
             model.AllInfo = await GetAllCoinInfo();
-            model.DatabaseInfo =GetCoinInfoFromDatabase(symbol);
+            model.DatabaseInfo = GetCoinInfoFromDatabase(symbol);
             var tempObject = await SearchBySymbolExact(symbol);
-            tempObject.CoinSymbol = model.CoinSymbol;
-            tempObject.Price = model.Price;
-            tempObject.PriceChange = model.PriceChange;
-            tempObject.PriceChangePercent = model.PriceChangePercent;
-            tempObject.Count = model.Count;
-                if (model.DatabaseInfo != null)
-                {
-                    model.IsinWallet = true;
-                    WalletDAL Coin = _db.AllWalletInfo.Where(e => e.UserID.Equals(userId) && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coding User id
-                    model.UserHigh = Coin.UserHigh;
-                    model.UserLow = Coin.UserLow;
-                }
+            var wallet = GetWalletFromDatabase(symbol);
+            model.CoinSymbol = tempObject.CoinSymbol;
+            model.Price = tempObject.Price;
+            model.PriceChange = tempObject.PriceChange;
+            model.PriceChangePercent = tempObject.PriceChangePercent;
+            model.Count = tempObject.Count;
+            model.Lables = new List<string>();
+            model.Data = new List<float>();
+            for (int i = 0; i < model.DatabaseInfo.Count; i++)
+            {
+                model.Lables.Add(model.DatabaseInfo[i].EntryTime.ToString());
+                model.Data.Add(model.DatabaseInfo[i].Price);
+            }
+            if (wallet != null)
+            {
+                model.IsinWallet = true;
+                model.UserHigh = wallet.UserHigh;
+                model.UserLow = wallet.UserLow;
+            }
+            else
+            {
+                model.IsinWallet = false;
+                model.UserHigh = 0;
+                model.UserLow = 0;
+
+            }
+
             return View(model);
+        }
+        public WalletDAL GetWalletFromDatabase(string symbol)
+        {
+            var Wallet = _db.AllWalletInfo.Where(s => s.Symbol == symbol).FirstOrDefault();
+            return Wallet;
         }
         public IActionResult Privacy()
         {

@@ -45,7 +45,40 @@
                      </button>
                     </li>
                 }
-            </ul>                                
+            </ul>
+            </div>
+            <div><div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                Line Chart
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="lineChart" width="500" height="500"></canvas>
+            </div>
+        </div>
+    </div>
+    </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+                <script type="text/javascript">
+                    var ctx = document.getElementById('lineChart').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['@Model.Lables.ElementAt(0)', '@Model.Lables.ElementAt(1)', '@Model.Lables.ElementAt(2)'],
+                            datasets: [{
+                                label: '@Model.CoinSymbol',
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: [@Model.Data.ElementAt(0),@Model.Data.ElementAt(1),@Model.Data.ElementAt(2)],
+                                fill: false
+                            }]
+                        },
+                        options: {},
+                    })
+                </script>
+    </div>
+            <div>
             @foreach(var post in @Model.RedditPosts)
             {
              <ul>
@@ -63,5 +96,6 @@
 
                                        
         </div>
+
     </tr>
 </form>

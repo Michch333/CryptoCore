@@ -23,13 +23,6 @@
     var chart = new Chart(ctx, {
         type: 'line',
         data: {
-            @{
-                var tlabels = new string[5];
-                for (int i = 0; i < 5; i++)
-                {
-                    tlabels.SetValue(Model.Lables.ElementAt(i), i);
-                }
-             }
             labels: ['@Model.Lables.ElementAt(0)', '@Model.Lables.ElementAt(1)', '@Model.Lables.ElementAt(2)'],
             datasets: [{
                 label: '@Model.CoinSymbol',

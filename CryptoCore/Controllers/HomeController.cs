@@ -205,7 +205,7 @@ namespace CryptoCore.Controllers
         public void AddCoinPreferenceToDatabase(string symbol, float high, float low)
         {
             var userId = _userManager.GetUserId(User);
-            var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID.Equals(userId) && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coded UserID
+            var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID.Equals(userId) && e.Symbol == symbol).FirstOrDefault();
             if (matchedRecord != null)
             {
                 matchedRecord.UserHigh = high;
@@ -224,7 +224,7 @@ namespace CryptoCore.Controllers
             }
             _db.SaveChanges();
         }
-        public void RemoveCoinPreference(string symbol) // TODO - Hard Coded user ID 
+        public void RemoveCoinPreference(string symbol)
         {
             var userId = _userManager.GetUserId(User);
             var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID.Equals(userId) && e.Symbol == symbol).FirstOrDefault();

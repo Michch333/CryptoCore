@@ -204,8 +204,8 @@ namespace CryptoCore.Controllers
         }
         public void AddCoinPreferenceToDatabase(string symbol, float high, float low)
         {
-            //var userId = await _userManager.GetUserId(User);
-            var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID == 1 && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coded UserID
+            var userId = _userManager.GetUserId(User);
+            var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID.Equals(userId) && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coded UserID
             if (matchedRecord != null)
             {
                 matchedRecord.UserHigh = high;
@@ -219,14 +219,15 @@ namespace CryptoCore.Controllers
                 newEntry.UserHigh = high;
                 newEntry.UserLow = low;
                 newEntry.TimeAddedToWallet = DateTime.Now;
-                newEntry.UserID = 1;
+                newEntry.UserID = userId;
                 _db.AllWalletInfo.Add(newEntry);
             }
             _db.SaveChanges();
         }
         public void RemoveCoinPreference(string symbol) // TODO - Hard Coded user ID 
         {
-            var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID == 1 && e.Symbol == symbol).FirstOrDefault();
+            var userId = _userManager.GetUserId(User);
+            var matchedRecord = _db.AllWalletInfo.Where(e => e.UserID.Equals(userId) && e.Symbol == symbol).FirstOrDefault();
             if (matchedRecord != null)
             {
                 _db.AllWalletInfo.Remove(matchedRecord);
@@ -259,10 +260,10 @@ namespace CryptoCore.Controllers
 
         private async Task<UserWalletViewModel> BuildWalletViewModel()
         {
-
+            var userId = _userManager.GetUserId(User);
             var model = new UserWalletViewModel();
             model.AllInfo = await GetAllCoinInfo();
-            var listOfCoins = _db.AllWalletInfo.Where(e => e.UserID == 1).ToList(); // TODO - Hard Coding User id
+            var listOfCoins = _db.AllWalletInfo.Where(e => e.UserID.Equals(userId)).ToList(); // TODO - Hard Coding User id
             foreach (var followedCoin in listOfCoins)
             {
 
@@ -354,6 +355,7 @@ namespace CryptoCore.Controllers
 
         public async Task<IActionResult> ExpandedCoin(string symbol = "DOGE")
         {
+            var userId = _userManager.GetUserId(User);
             var model = new ExpandedCoinViewModel();
             model.RedditPosts = await SearchReddit(symbol);
             model.AllInfo = await GetAllCoinInfo();
@@ -367,7 +369,7 @@ namespace CryptoCore.Controllers
                 if (model.DatabaseInfo != null)
                 {
                     model.IsinWallet = true;
-                    WalletDAL Coin = _db.AllWalletInfo.Where(e => e.UserID == 1 && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coding User id
+                    WalletDAL Coin = _db.AllWalletInfo.Where(e => e.UserID.Equals(userId) && e.Symbol == symbol).FirstOrDefault(); // TODO - Hard Coding User id
                     model.UserHigh = Coin.UserHigh;
                     model.UserLow = Coin.UserLow;
                 }

@@ -12,7 +12,7 @@ namespace CryptoCore.Models.DALModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EntryId { get; set; }
-        public int UserID { get; set; } // TODO - Need to get this from identity?
+        public string UserID { get; set; } // TODO - Need to get this from identity?
         public string Symbol { get; set; }
         public double UserHigh { get; set; }
         public double UserLow { get; set; }

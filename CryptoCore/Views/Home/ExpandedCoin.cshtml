@@ -7,7 +7,7 @@
 <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@Model.CoinSymbol" asp-route-high="high" asp-route-low="low">
      <tr class="crypto-transactions-list__item--details">
                      
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1" style="display:inline">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1">
             <ul class="mdc-list mdc-list--dense demo-list">
                 <h1>@Model.CoinSymbol</h1>
                     @if(@Model.IsinWallet == true)

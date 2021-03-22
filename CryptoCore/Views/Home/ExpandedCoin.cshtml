@@ -65,12 +65,12 @@
                         var chart = new Chart(ctx, {
                             type: 'line',
                             data: {
-                                labels: ['@Model.Lables.ElementAt(0)', '@Model.Lables.ElementAt(1)', '@Model.Lables.ElementAt(2)'],
+                                labels: ['@Model.Lables.ElementAt(0)', '@Model.Lables.ElementAt(1)', '@Model.Lables.ElementAt(2)', '@Model.Lables.ElementAt(3)', '@Model.Lables.ElementAt(4)'],
                                 datasets: [{
                                     label: '@Model.CoinSymbol',
                                     backgroundColor: 'rgb(255, 99, 132)',
                                     borderColor: 'rgb(255, 99, 132)',
-                                    data: [@Model.Data.ElementAt(0),@Model.Data.ElementAt(1),@Model.Data.ElementAt(2)],
+                                    data: [@Model.Data.ElementAt(0),@Model.Data.ElementAt(1),@Model.Data.ElementAt(2),@Model.Data.ElementAt(3), @Model.Data.ElementAt(4)],
                                     fill: false
                                 }]
                             },

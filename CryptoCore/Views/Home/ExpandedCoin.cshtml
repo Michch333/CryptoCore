@@ -5,97 +5,97 @@
 }
 @model CryptoCore.Models.ViewModels.ExpandedCoinViewModel
 <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@Model.CoinSymbol" asp-route-high="high" asp-route-low="low">
-    <tr class="crypto-transactions-list__item--details">
+     <tr class="crypto-transactions-list__item--details">
                      
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1">
             <ul class="mdc-list mdc-list--dense demo-list">
                 <h1>@Model.CoinSymbol</h1>
-                @if(@Model.IsinWallet == true)
-                {
-                     <li class="mdc-list-item">                           
-                        Update High <input placeholder="Please enter high" name="high" width="48"  type="text" class="mdc-text-field__input" required>
-                    </li>
-                    <li class="mdc-list-item">
-                        Update Low <input type="text" placeholder="Please enter low" name="low" width="48" class="mdc-text-field__input" required>
-                    </li>
-                    <li>
-                        <button class="mdc-button mdc-button--outlined" >
-                        Update
-                        </button>
-                    </li>
+                    @if(@Model.IsinWallet == true)
+                    {
+                         <li class="mdc-list-item">                           
+                            Update High <input placeholder="Please enter high" name="high" width="48"  type="text" class="mdc-text-field__input" required>
+                        </li>
+                        <li class="mdc-list-item">
+                            Update Low <input type="text" placeholder="Please enter low" name="low" width="48" class="mdc-text-field__input" required>
+                        </li>
+                        <li>
+                            <button class="mdc-button mdc-button--outlined" >
+                            Update
+                            </button>
+                        </li>
                 
                 
-                    <li>
-                        <button type="button" onclick="location.href='@Url.Action("RemoveCoin", "Home", new {symbol = Model.CoinSymbol})'" class="mdc-button mdc-button--outlined" >
-                        Delete
-                        </button>
-                    </li>
-                }
-                else
-                {
-                   <li class="mdc-list-item">                           
-                    Set High <input placeholder="Please enter high" name="high" width="48"  type="text" class="mdc-text-field__input" required>
-                    </li>
-                    <li class="mdc-list-item">
-                        Set Low <input type="text" placeholder="Please enter low" name="low" width="48" class="mdc-text-field__input" required>
-                    </li>
-                    <li>
-                     <button class="mdc-button mdc-button--outlined" >
-                       Add
-                     </button>
-                    </li>
-                }
-            </ul>
-            </div>
-            <div><div class="row">
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-header">
-                Line Chart
-            </div>
-            <div class="card-body">
-                <canvas class="my-4 h-25" id="lineChart" width="500" height="500"></canvas>
+                        <li>
+                            <button type="button" onclick="location.href='@Url.Action("RemoveCoin", "Home", new {symbol = Model.CoinSymbol})'" class="mdc-button mdc-button--outlined" >
+                            Delete
+                            </button>
+                        </li>
+                    }
+                    else
+                    {
+                       <li class="mdc-list-item">                           
+                        Set High <input placeholder="Please enter high" name="high" width="48"  type="text" class="mdc-text-field__input" required>
+                        </li>
+                        <li class="mdc-list-item">
+                            Set Low <input type="text" placeholder="Please enter low" name="low" width="48" class="mdc-text-field__input" required>
+                        </li>
+                        <li>
+                         <button class="mdc-button mdc-button--outlined" >
+                           Add
+                         </button>
+                        </li>
+                    }
+                </ul>
+                </div>
+                <div><div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    Line Chart
+                </div>
+                <div class="card-body">
+                    <canvas class="my-4 h-25" id="lineChart"></canvas>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
-                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-                <script type="text/javascript">
-                    var ctx = document.getElementById('lineChart').getContext('2d');
-                    var chart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: ['@Model.Lables.ElementAt(0)', '@Model.Lables.ElementAt(1)', '@Model.Lables.ElementAt(2)'],
-                            datasets: [{
-                                label: '@Model.CoinSymbol',
-                                backgroundColor: 'rgb(255, 99, 132)',
-                                borderColor: 'rgb(255, 99, 132)',
-                                data: [@Model.Data.ElementAt(0),@Model.Data.ElementAt(1),@Model.Data.ElementAt(2)],
-                                fill: false
-                            }]
-                        },
-                        options: {},
-                    })
-                </script>
-    </div>
-            <div>
-            @foreach(var post in @Model.RedditPosts)
-            {
-             <ul>
-                <li class="mdc-list-item">
-                    @post.Title      
-                </li>
-                <li class="mdc-list-item">
-                    @post.SubReddit      
-                </li>
-                <li class="mdc-list-item">
-                    <a>@post.PermaLink</a>
-                </li>
-             </ul>
-            }
+        </div>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+                    <script type="text/javascript">
+                        var ctx = document.getElementById('lineChart').getContext('2d');
+                        var chart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: ['@Model.Lables.ElementAt(0)', '@Model.Lables.ElementAt(1)', '@Model.Lables.ElementAt(2)'],
+                                datasets: [{
+                                    label: '@Model.CoinSymbol',
+                                    backgroundColor: 'rgb(255, 99, 132)',
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    data: [@Model.Data.ElementAt(0),@Model.Data.ElementAt(1),@Model.Data.ElementAt(2)],
+                                    fill: false
+                                }]
+                            },
+                            options: {},
+                        })
+                    </script>
+        </div>
+                <div>
+                @foreach(var post in @Model.RedditPosts)
+                {
+                 <ul>
+                    <li class="mdc-list-item">
+                        @post.Title      
+                    </li>
+                    <li class="mdc-list-item">
+                        @post.SubReddit      
+                    </li>
+                    <li class="mdc-list-item">
+                        <a>@post.PermaLink</a>
+                    </li>
+                 </ul>
+                }
 
                                        
-        </div>
+            </div>
 
-    </tr>
+        </tr>
 </form>

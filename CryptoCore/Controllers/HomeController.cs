@@ -120,6 +120,39 @@ namespace CryptoCore.Controllers
             return combinedInfo;
 
         }
+        public async Task<List<CoinTickerCombinedModel>> GetAllCoinInfo(bool shouldSaveToDatabase = true)
+        {
+
+            var combinedInfo = new List<CoinTickerCombinedModel>();
+            var priceList = await ConvertPricesToFloatAndRemoveUsdt();
+            var tickerList = await ConvertTickerToFloatAndRemoveUsdt();
+            foreach (var coin in priceList)
+
+            {
+                foreach (var ticker in tickerList)
+                {
+                    if (coin.Symbol == ticker.Symbol)
+                    {
+                        var tempObject = new CoinTickerCombinedModel();
+                        tempObject.CoinSymbol = coin.Symbol;
+                        tempObject.TickerSymbol = ticker.Symbol;
+                        tempObject.Price = coin.Price;
+                        tempObject.PriceChange = ticker.PriceChange;
+                        tempObject.PriceChangePercent = ticker.PriceChangePercent;
+                        tempObject.Count = ticker.Count;
+                        combinedInfo.Add(tempObject);
+                        if (shouldSaveToDatabase)
+                        {
+                            AddCoinInfoToDatabase(tempObject);
+                        }
+                    }
+
+                }
+
+            }
+            return combinedInfo;
+
+        }
 
         public List<CurrentPriceResponse> RemoveUsdt(List<CurrentPriceResponse> response)
         {
@@ -414,6 +447,13 @@ namespace CryptoCore.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         } 
+        public async Task<IActionResult> DatabaseUpdate(bool shouldUpdateDatabase) 
+        {
+            var model = new CoinTickerCombinedViewModel();
+            model.AllInfo = await GetAllCoinInfo(shouldUpdateDatabase);
+
+            return View(model);
+        }
 
     }
 }

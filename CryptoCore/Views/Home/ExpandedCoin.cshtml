@@ -7,7 +7,7 @@
 <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@Model.CoinSymbol" asp-route-high="high" asp-route-low="low">
      <tr class="crypto-transactions-list__item--details">
                      
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1" style="display:inline">
             <ul class="mdc-list mdc-list--dense demo-list">
                 <h1>@Model.CoinSymbol</h1>
                     @if(@Model.IsinWallet == true)
@@ -54,7 +54,7 @@
                     Line Chart
                 </div>
                 <div class="card-body">
-                    <canvas class="my-4 h-25" id="lineChart"></canvas>
+                    <canvas class="my-4 h-25" id="lineChart" style="height: 300px; width: 100%;"></canvas>
                 </div>
             </div>
         </div>

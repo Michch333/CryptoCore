@@ -14969,7 +14969,11 @@ a.mdc-list-item {
   overflow: hidden;
   margin-top: -36px;
   -webkit-transform: none !important;
-  transform: none !important; }
+  transform: none !important;
+}
+.shouldHover:hover {
+    cursor: pointer !important;
+}
   @media (max-width: 479px) {
     .crypto-marquee__wrapper {
       margin-top: 0; } }
@@ -14983,7 +14987,8 @@ a.mdc-list-item {
   height: 136px;
   overflow: hidden;
   left: 0;
-  top: 0; }
+  top: 0;
+}
 
 .crypto-marquee__item {
   min-width: 240px;
@@ -14999,6 +15004,10 @@ a.mdc-list-item {
   margin: 0;
   font-weight: 500;
   border-left: 1px solid rgba(0, 0, 0, 0.075); }
+
+.crypto-marquee__item:hover {
+    cursor: pointer !important;
+}
 
 .crypto-marquee__item-logo {
   font-size: 1rem;
@@ -16355,7 +16364,9 @@ a {
   .crypto-border-list__border-hover,
   .crypto-border-list__item--active
   .crypto-border-list__border-hover {
-    top: 0; }
+    top: 0;
+    cursor: pointer;
+  }
 
 .crypto-border-list__border-hover {
   top: 100%; }

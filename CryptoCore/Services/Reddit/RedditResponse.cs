@@ -46,7 +46,7 @@ namespace CryptoCore.Models.ApiModels
             public Link_Flair_Richtext[] link_flair_richtext { get; set; }
             public string subreddit_name_prefixed { get; set; }
             public bool hidden { get; set; }
-            public int pwls { get; set; }
+            //public int pwls { get; set; }
             public string link_flair_css_class { get; set; }
             public int downs { get; set; }
             public int? thumbnail_height { get; set; }
@@ -86,7 +86,7 @@ namespace CryptoCore.Models.ApiModels
             public object mod_note { get; set; }
             //public int created { get; set; }
             public string link_flair_type { get; set; }
-            public int wls { get; set; }
+            //public int wls { get; set; }
             public object removed_by_category { get; set; }
             public object banned_by { get; set; }
             public string author_flair_type { get; set; }

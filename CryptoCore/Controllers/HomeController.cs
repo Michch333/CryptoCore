@@ -162,7 +162,7 @@ namespace CryptoCore.Controllers
                 if (coin.symbol.EndsWith("USDT"))
                 {
                     var tempObject = new CurrentPriceResponse();
-                    tempObject.symbol = coin.symbol;
+                    tempObject.symbol = coin.symbol.Replace("USDT","");
                     tempObject.price = coin.price;
                     pickles.Add(tempObject);
                 }
@@ -178,7 +178,7 @@ namespace CryptoCore.Controllers
                 if (coin.symbol.EndsWith("USDT"))
                 {
                     var tempObject = new TickerResponse();
-                    tempObject.symbol = coin.symbol;
+                    tempObject.symbol = coin.symbol.Replace("USDT", "");
                     tempObject.priceChangePercent = coin.priceChangePercent;
                     tempObject.priceChange = coin.priceChange;
                     tempObject.count = coin.count;
@@ -209,15 +209,29 @@ namespace CryptoCore.Controllers
             _db.Coins.Add(tempCoin);
             _db.SaveChanges();
         }
-        public async void AddCoinInfoToDatabase(string symbol)
+        //public async void AddCoinInfoToDatabase(string symbol)
+        //{
+        //    var results = await SearchBySymbol(symbol);
+        //    foreach (var coin in results)
+        //    {
+        //        CoinDAL newDAL = new CoinDAL();
+        //        newDAL.Price = coin.Price;
+        //        newDAL.Symbol = coin.CoinSymbol;
+        //        newDAL.Count =69;
+        //        _db.Coins.Add(newDAL);
+        //    }
+        //    _db.SaveChanges();
+        //}
+
+        public async Task AddCoinInfoToDatabase(string symbol)
         {
             var results = await SearchBySymbol(symbol);
             foreach (var coin in results)
             {
-                var newDAL = new CoinDAL();
+                CoinDAL newDAL = new CoinDAL();
                 newDAL.Price = coin.Price;
                 newDAL.Symbol = coin.CoinSymbol;
-                newDAL.Count = 69; // TODO - Cant access count because its something already
+                newDAL.Count = coin.Count;
                 _db.Coins.Add(newDAL);
             }
             _db.SaveChanges();
@@ -269,7 +283,7 @@ namespace CryptoCore.Controllers
         }
         public List<CoinDAL> GetCoinInfoFromDatabase(string symbol)
         {
-            var listOfCoinRecords = _db.Coins.Where(s => s.Symbol == symbol).ToList<CoinDAL>();
+            var listOfCoinRecords = _db.Coins.Where(s => s.Symbol == symbol).OrderBy(dt=>dt.EntryTime).ToList<CoinDAL>();
             return listOfCoinRecords;
         }
         public List<CoinDAL> GetCoinInfoFromDatabase()
@@ -388,6 +402,7 @@ namespace CryptoCore.Controllers
 
         public async Task<IActionResult> ExpandedCoin(string symbol = "DOGE")
         {
+            await AddCoinInfoToDatabase(symbol);
             var userId = _userManager.GetUserId(User);
             var model = new ExpandedCoinViewModel();
             model.RedditPosts = await SearchReddit(symbol);
@@ -402,9 +417,13 @@ namespace CryptoCore.Controllers
             model.Count = tempObject.Count;
             model.Lables = new List<string>();
             model.Data = new List<float>();
-            for (int i = 0; i < model.DatabaseInfo.Count; i++)
+            double datbaseDividedByFive = (model.DatabaseInfo.Count() / 5);
+            var iter = (int)Math.Truncate(datbaseDividedByFive);
+            var easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+            for (int i = model.DatabaseInfo.Count - 1; i >= iter - 1; i = i - iter )
             {
-                model.Lables.Add(model.DatabaseInfo[i].EntryTime.ToString());
+                var timeInEST = model.DatabaseInfo[i].EntryTime.ToLocalTime();
+                model.Lables.Add(timeInEST.ToString());
                 model.Data.Add(model.DatabaseInfo[i].Price);
             }
             if (wallet != null)

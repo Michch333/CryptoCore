@@ -7,7 +7,7 @@
 <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@Model.CoinSymbol" asp-route-high="high" asp-route-low="low">
      <tr class="crypto-transactions-list__item--details">
                      
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1"style="width:200px;">
             <ul class="mdc-list mdc-list--dense demo-list">
                 <h1>@Model.CoinSymbol</h1>
                     @if(@Model.IsinWallet == true)
@@ -34,10 +34,10 @@
                     else
                     {
                        <li class="mdc-list-item">                           
-                        Set High <input placeholder="Please enter high" name="high" width="48"  type="text" class="mdc-text-field__input" required>
+                        Set High <input placeholder="Please enter high" name="high" type="text" class="mdc-text-field__input" required>
                         </li>
                         <li class="mdc-list-item">
-                            Set Low <input type="text" placeholder="Please enter low" name="low" width="48" class="mdc-text-field__input" required>
+                            Set Low <input type="text" placeholder="Please enter low" name="low" class="mdc-text-field__input" required>
                         </li>
                         <li>
                          <button class="mdc-button mdc-button--outlined" >
@@ -54,7 +54,7 @@
                     Line Chart
                 </div>
                 <div class="card-body">
-                    <canvas class="my-4 h-25" id="lineChart" style="height: 300px; width: 100%;"></canvas>
+                    <canvas class="my-4 h-25" id="lineChart" style="height: 300px; width: 75%;"></canvas>
                 </div>
             </div>
         </div>
@@ -65,12 +65,12 @@
                         var chart = new Chart(ctx, {
                             type: 'line',
                             data: {
-                                labels: ['@Model.Lables.ElementAt(0)', '@Model.Lables.ElementAt(1)', '@Model.Lables.ElementAt(2)', '@Model.Lables.ElementAt(3)', '@Model.Lables.ElementAt(4)'],
+                                labels: ['@Model.Lables.ElementAt(4)', '@Model.Lables.ElementAt(3)', '@Model.Lables.ElementAt(2)', '@Model.Lables.ElementAt(1)', '@Model.Lables.ElementAt(0)'],
                                 datasets: [{
                                     label: '@Model.CoinSymbol',
                                     backgroundColor: 'rgb(255, 99, 132)',
-                                    borderColor: 'rgb(255, 99, 132)',
-                                    data: [@Model.Data.ElementAt(0),@Model.Data.ElementAt(1),@Model.Data.ElementAt(2),@Model.Data.ElementAt(3), @Model.Data.ElementAt(4)],
+                                    borderColor: 'rgb(255, 206, 97)',
+                                    data: [@Model.Data.ElementAt(4),@Model.Data.ElementAt(3),@Model.Data.ElementAt(2),@Model.Data.ElementAt(1), @Model.Data.ElementAt(0)],
                                     fill: false
                                 }]
                             },
@@ -83,13 +83,10 @@
                 {
                  <ul>
                     <li class="mdc-list-item">
-                        @post.Title      
+                        <a href="@post.PermaLink">@post.Title</a>
                     </li>
                     <li class="mdc-list-item">
-                        @post.SubReddit      
-                    </li>
-                    <li class="mdc-list-item">
-                        <a>@post.PermaLink</a>
+                        Found on r/@post.SubReddit      
                     </li>
                  </ul>
                 }

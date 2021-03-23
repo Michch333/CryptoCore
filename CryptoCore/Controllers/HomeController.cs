@@ -373,7 +373,7 @@ namespace CryptoCore.Controllers
             foreach (var coin in curatedList)
             {
 
-                if (coin.CoinSymbol.Contains(upperSymbol))
+                if (coin.CoinSymbol.Equals(upperSymbol))
                 {
                     searchedCoin.CoinSymbol = coin.CoinSymbol;
                     searchedCoin.Price = coin.Price;

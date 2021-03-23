@@ -14966,6 +14966,11 @@ a.mdc-list-item {
   margin-top: -36px;
   -webkit-transform: none !important;
   transform: none !important; }
+
+.crypto-marquee__wrapper:hover {
+    cursor: pointer !important;
+}
+
   @media (max-width: 479px) {
     .crypto-marquee__wrapper {
       margin-top: 0; } }
@@ -14994,7 +14999,13 @@ a.mdc-list-item {
   line-height: 1rem;
   margin: 0;
   font-weight: 500;
-  border-left: 1px solid rgba(206, 197, 188, 0.075); }
+  border-left: 1px solid rgba(206, 197, 188, 0.075);
+  cursor: pointer !important;
+}
+
+.shouldHover.crypto-marquee__item:hover {
+    cursor: pointer !important;
+}
 
 .crypto-marquee__item-logo {
   font-size: 1rem;
@@ -16486,3 +16497,7 @@ h1 {
 
 .mdc-snackbar__action-wrapper {
   padding-left: 0; }
+
+.shouldHover:hover {
+    cursor: pointer !important;
+}

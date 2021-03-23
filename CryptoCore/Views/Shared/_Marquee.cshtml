@@ -6,7 +6,7 @@
             <!-- start of ticker -->
             @foreach (var coin in Model.AllInfo)
             {
-                <div class="crypto-marquee__item">
+                <div class="shouldHover crypto-marquee__item" onclick="location.href='@Url.Action("ExpandedCoin", "Home", new { symbol = @coin.CoinSymbol })'">
                     <h3 class="crypto-marquee__item-logo">
                         <!-- Image or SVG here -->
 

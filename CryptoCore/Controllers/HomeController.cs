@@ -420,10 +420,9 @@ namespace CryptoCore.Controllers
             double datbaseDividedByFive = (model.DatabaseInfo.Count() / 5);
             var iter = (int)Math.Truncate(datbaseDividedByFive);
             var easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-            for (int i = model.DatabaseInfo.Count - 1; i >= iter - 1; i = i - iter )
+            for (int i = model.DatabaseInfo.Count - 1; i >= iter - 1; i = i - iter)
             {
-                var timeInEST = TimeZoneInfo.ConvertTimeFromUtc(model.DatabaseInfo[i].EntryTime, easternZone);
-                model.Lables.Add(timeInEST.ToString());
+                model.Lables.Add(model.DatabaseInfo[i].EntryTime.ToLocalTime().ToString());
                 model.Data.Add(model.DatabaseInfo[i].Price);
             }
             if (wallet != null)

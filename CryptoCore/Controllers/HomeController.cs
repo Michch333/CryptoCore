@@ -422,7 +422,7 @@ namespace CryptoCore.Controllers
             var easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
             for (int i = model.DatabaseInfo.Count - 1; i >= iter - 1; i = i - iter )
             {
-                var timeInEST = model.DatabaseInfo[i].EntryTime.ToLocalTime();
+                var timeInEST = TimeZoneInfo.ConvertTimeFromUtc(model.DatabaseInfo[i].EntryTime, easternZone);
                 model.Lables.Add(timeInEST.ToString());
                 model.Data.Add(model.DatabaseInfo[i].Price);
             }

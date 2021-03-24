@@ -6,9 +6,25 @@
 @model CryptoCore.Models.ViewModels.ExpandedCoinViewModel      
 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1" style="width:100%; display: flex; flex-direction: row; justify-content: space-between">
     <div class="mdc-list demo-list" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; height: 100%">
-        <h1 style="flex-grow: 3;">@Model.CoinSymbol</h1>
-        <p> price @Model.Price </p>
-        <p> price change %@Model.PriceChangePercent</p>
+        <h1 style="flex-grow: 3; color: #FFCE61">@Model.CoinSymbol</h1>
+        <p> Price: @Model.Price </p>
+        <div> 24HR change:
+         @if (@Model.PriceChangePercent > 0)
+                    {
+                        <div style="display: inline;" class="crypto-marquee__item-percentage mdc-tab__crypto-stat-caption--trend-up">
+                            <i class="material-icons" style="color: green">trending_up</i>
+                              @Model.PriceChangePercent%
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="display: inline;" class="crypto-marquee__item-percentage mdc-tab__crypto-stat-caption--trend-down">
+                            <i class="material-icons">trending_down</i>
+                             @Model.PriceChangePercent%
+                    
+                        </div>
+                    }
+        </div>
         @if (@Model.IsinWallet == true)
         {
             <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@Model.CoinSymbol" asp-route-high="high" asp-route-low="low" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center">
@@ -80,7 +96,7 @@
 {
     <ul>
     <li class="mdc-list-item">
-        <a href="@post.PermaLink">@post.Title</a>
+        <a target="_blank" href="@post.PermaLink">@post.Title</a>
     </li>
     <li class="mdc-list-item">
         Found on r/@post.SubReddit      

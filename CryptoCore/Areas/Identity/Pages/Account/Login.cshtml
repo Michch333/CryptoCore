@@ -5,35 +5,36 @@
 <div class="crypro-login-container">
     <div class="col-md-6 ">
         <section>
-            <form id="account" method="post" >
-               
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group mdc-text-field ">
-                    <input asp-for="Input.Email" placeholder="Email" class="form-control mdc-text-field__input" required />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group mdc-text-field " >
-                    <input asp-for="Input.Password" placeholder="Password" class="form-control mdc-text-field__input" required />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="mdc-form-field">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe" class="remember-me-checkbox">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
+            <form id="account" method="post">
+                <h4 style="color:#FFCE61">SIGN IN</h4>
+                <div asp-validation-summary="All" class="text-danger">
+                    <div class="form-group  ">
+                        <input asp-for="Input.Email" placeholder="Email" class="mdc-text-field__input" required/>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary mdc-button mdc-button--unelevated big-round-corner-button">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
+                    <div class="form-group">
+                        <input asp-for="Input.Password" placeholder="Password" class="mdc-text-field__input" required />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="mdc-form-field">
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMe" class="remember-me-checkbox">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary mdc-button mdc-button--unelevated big-round-corner-button">Log in</button>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        </p>
+                        <p>
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        </p>
+                    </div>
                 </div>
             </form>
         </section>

@@ -7,6 +7,8 @@
 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1" style="width:100%; display: flex; flex-direction: row; justify-content: space-between">
     <div class="mdc-list demo-list" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; height: 100%">
         <h1 style="flex-grow: 3;">@Model.CoinSymbol</h1>
+        <p> price @Model.Price </p>
+        <p> price change %@Model.PriceChangePercent</p>
         @if (@Model.IsinWallet == true)
         {
             <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@Model.CoinSymbol" asp-route-high="high" asp-route-low="low" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center">

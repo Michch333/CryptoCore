@@ -14,7 +14,7 @@ namespace CryptoCore.Services.Reddit
         }
         public async Task<RedditResponse> GetRedditSearchInfo(string search = "DOGE")
         {
-            var result = await _client.GetAsync($"/search.json?q={search}");
+            var result = await _client.GetAsync($"/search.json?q={search}/?sort=new");
 
             if (result.IsSuccessStatusCode && result != null)
             {

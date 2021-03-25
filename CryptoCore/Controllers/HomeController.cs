@@ -460,6 +460,7 @@ namespace CryptoCore.Controllers
             model.DatabaseInfo = GetCoinInfoFromDatabase(symbol);
             var tempObject = await SearchBySymbolExact(symbol);
             var wallet = GetWalletFromDatabase(symbol);
+            model.HighLowPassed=await TwentyFourHoursIsOutOfBounds(symbol);
             model.CoinSymbol = tempObject.CoinSymbol;
             model.Price = tempObject.Price;
             model.PriceChange = tempObject.PriceChange;

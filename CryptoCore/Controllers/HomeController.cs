@@ -55,7 +55,6 @@ namespace CryptoCore.Controllers
             }
             return coinList;
         }
-
         public async Task<List<RedditModel>> SearchReddit(string search)
         {
             var redditList = new List<RedditModel>();

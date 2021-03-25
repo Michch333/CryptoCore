@@ -15,6 +15,7 @@ namespace CryptoCore.Services.Binance
         public double PriceChange { get; set; }
         public float PriceChangePercent { get; set; }
         public int Count { get; set; }
+        public DateTime EntryDate { get; set; }
 
     }
 

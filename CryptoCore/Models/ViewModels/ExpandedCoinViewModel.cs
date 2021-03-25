@@ -15,7 +15,9 @@ namespace CryptoCore.Models.ViewModels
             RedditPosts = new List<RedditModel>();
             DatabaseInfo = new List<CoinDAL>();
             AllInfo = new List<CoinTickerCombinedModel>();
-          
+            HighLowPassed= new List<CoinTickerCombinedModel>();
+
+
         }
         public string CoinSymbol { get; set; }
         public float Price { get; set; }
@@ -30,6 +32,7 @@ namespace CryptoCore.Models.ViewModels
         public List<CoinTickerCombinedModel> AllInfo { get; set; }
         public List<string> Lables { get; set; }
         public List<float> Data { get; set; }
+        public List<CoinTickerCombinedModel> HighLowPassed { get; set; }
     }
 }
 

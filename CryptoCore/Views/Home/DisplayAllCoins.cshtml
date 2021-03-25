@@ -20,10 +20,10 @@
             <tbody>
                 @foreach (var coin in Model.AllInfo)
                 {
-                <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@coin.CoinSymbol" asp-route-high="high" asp-route-low="low">
+                <form asp-controller="Home" asp-action="AddCoin" asp-route-symbol="@coin.CoinSymbol" asp-route-high="high" asp-route-low="low" >
                 <tr class="crypto-transactions-list__item">
                     <td class="mdl-data-table__cell--icon"><i class="fab fa-bitcoin"></i></td>
-                    <td class="mdl-data-table__cell--non-numeric">@coin.CoinSymbol.Replace("USDT", "")</td>
+                    <td onclick="location.href='@Url.Action("ExpandedCoin", "Home", new { symbol = @coin.CoinSymbol })'" class="mdl-data-table__cell--non-numeric">@coin.CoinSymbol.Replace("USDT", "")</td>
                     <td class="mdl-data-table__cell--non-numeric">$@coin.Price</td>
                     <td class="mdl-data-table__cell--non-numeric">%@coin.PriceChangePercent</td>
                     <td class="mdl-data-table__cell--non-numeric">@coin.Count</td>

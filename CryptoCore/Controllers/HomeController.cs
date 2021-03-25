@@ -365,6 +365,56 @@ namespace CryptoCore.Controllers
             }
             return searchedCoin;
         }
+        private async Task<List<WalletDAL>> BuildWallet()
+        {
+            var userId = _userManager.GetUserId(User);
+            var WalletInfo = new List<WalletDAL>();
+
+            var listOfCoins = _db.AllWalletInfo.Where(e => e.UserID.Equals(userId)).ToList(); // TODO - Hard Coding User id
+            foreach (var followedCoin in listOfCoins)
+            {
+
+                var coinInfo = await SearchBySymbolExact(followedCoin.Symbol);
+                var tempObject = new WalletDAL();
+                tempObject.Symbol = coinInfo.CoinSymbol;
+                tempObject.UserHigh = followedCoin.UserHigh;
+                tempObject.UserLow = followedCoin.UserLow;
+                WalletInfo.Add(tempObject);
+            }
+
+            return WalletInfo;
+        }
+        public async Task<List<CoinTickerCombinedModel>> TwentyFourHoursIsOutOfBounds(string symbol = "DOGE")
+        {
+            var userId = _userManager.GetUserId(User);
+            var upperSymbol = symbol.ToUpper();
+            var outOfBoundsList = new List<CoinTickerCombinedModel>();
+            var curatedList = await GetAllCoinInfo();
+            var wallet = _db.AllWalletInfo.Where(e => e.UserID.Equals(userId)).ToList();
+            var dbInfo = GetCoinInfoFromDatabase(symbol);
+            foreach (var walletEntry in wallet)
+            {
+                foreach (var coin in curatedList)
+                {
+                    foreach (var record in dbInfo)
+                    {
+                        DateTime entryTime = record.EntryTime;
+                        if (coin.CoinSymbol.Contains(upperSymbol) && entryTime >= DateTime.Now.AddDays(-1) && walletEntry.UserHigh < record.Price && walletEntry.UserLow > record.Price)
+                        {
+                            var tempObject = new CoinTickerCombinedModel();
+                            tempObject.CoinSymbol = coin.CoinSymbol;
+                            tempObject.Price = coin.Price;
+                            tempObject.PriceChange = coin.PriceChange;
+                            tempObject.PriceChangePercent = coin.PriceChangePercent;
+                            tempObject.Count = coin.Count;
+                            outOfBoundsList.Add(tempObject);
+
+                        }
+                    }
+                }        
+            }
+            return outOfBoundsList;
+        }
 
         public async Task<CoinTickerCombinedModel> SearchBySymbolExact(string symbol = "DOGE")
         {
@@ -473,6 +523,7 @@ namespace CryptoCore.Controllers
 
             return View(model);
         }
+
 
     }
 }

@@ -55,18 +55,21 @@ namespace CryptoCore.Controllers
             }
             return coinList;
         }
+
         public async Task<List<RedditModel>> SearchReddit(string search)
         {
             var redditList = new List<RedditModel>();
             var redditResponse = await _redditClient.GetRedditSearchInfo(search);
-            TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
             foreach (var post in redditResponse.data.children)
             {
+                
                 var tempObject = new RedditModel();
                 tempObject.Title = post.data.title;
                 tempObject.SubReddit = post.data.subreddit;
                 tempObject.AuthorName = post.data.author;
                 tempObject.PermaLink = "https://www.reddit.com" + post.data.permalink;
+                tempObject.Downs = post.data.downs;
+                tempObject.Ups = post.data.ups;
                 redditList.Add(tempObject);
 
             }

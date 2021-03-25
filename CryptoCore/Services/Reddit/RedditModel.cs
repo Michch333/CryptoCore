@@ -8,11 +8,6 @@ namespace CryptoCore.Services.Reddit
 {
     public class RedditModel
     {
-        public RedditModel()
-        {
-
-        }
- 
         public string SubReddit { get; set; }
         public string AuthorName { get; set; }
         public string Title { get; set; }

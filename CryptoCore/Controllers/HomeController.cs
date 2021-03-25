@@ -62,7 +62,6 @@ namespace CryptoCore.Controllers
             var redditResponse = await _redditClient.GetRedditSearchInfo(search);
             foreach (var post in redditResponse.data.children)
             {
-                
                 var tempObject = new RedditModel();
                 tempObject.Title = post.data.title;
                 tempObject.SubReddit = post.data.subreddit;

@@ -389,29 +389,28 @@ namespace CryptoCore.Controllers
             var userId = _userManager.GetUserId(User);
             var upperSymbol = symbol.ToUpper();
             var outOfBoundsList = new List<CoinTickerCombinedModel>();
-            var curatedList = await GetAllCoinInfo();
+            var coin = await SearchBySymbolExact(symbol);
             var wallet = _db.AllWalletInfo.Where(e => e.UserID.Equals(userId)).ToList();
             var dbInfo = GetCoinInfoFromDatabase(symbol);
             foreach (var walletEntry in wallet)
             {
-                foreach (var coin in curatedList)
-                {
-                    foreach (var record in dbInfo)
-                    {
-                        DateTime entryTime = record.EntryTime;
-                        if (coin.CoinSymbol.Contains(upperSymbol) && entryTime >= DateTime.Now.AddDays(-1) && walletEntry.UserHigh < record.Price && walletEntry.UserLow > record.Price)
-                        {
-                            var tempObject = new CoinTickerCombinedModel();
-                            tempObject.CoinSymbol = coin.CoinSymbol;
-                            tempObject.Price = coin.Price;
-                            tempObject.PriceChange = coin.PriceChange;
-                            tempObject.PriceChangePercent = coin.PriceChangePercent;
-                            tempObject.Count = coin.Count;
-                            outOfBoundsList.Add(tempObject);
 
-                        }
+                foreach (var record in dbInfo)
+                {
+                    DateTime entryTime = record.EntryTime;
+                    if (coin.CoinSymbol.Contains(upperSymbol) && entryTime >= DateTime.Now.AddDays(-1) && walletEntry.UserHigh < record.Price && walletEntry.UserLow > record.Price)
+                    {
+                        var tempObject = new CoinTickerCombinedModel();
+                        tempObject.CoinSymbol = coin.CoinSymbol;
+                        tempObject.Price = coin.Price;
+                        tempObject.PriceChange = coin.PriceChange;
+                        tempObject.PriceChangePercent = coin.PriceChangePercent;
+                        tempObject.Count = coin.Count;
+                        outOfBoundsList.Add(tempObject);
+
                     }
-                }        
+                }
+                        
             }
             return outOfBoundsList;
         }

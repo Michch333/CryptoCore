@@ -406,6 +406,7 @@ namespace CryptoCore.Controllers
                         tempObject.PriceChange = coin.PriceChange;
                         tempObject.PriceChangePercent = coin.PriceChangePercent;
                         tempObject.Count = coin.Count;
+                        tempObject.EntryDate = record.EntryTime;
                         outOfBoundsList.Add(tempObject);
 
                     }
